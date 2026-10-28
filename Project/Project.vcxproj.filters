@@ -31,6 +31,9 @@
     <Filter Include="Source\Camera">
       <UniqueIdentifier>{59a8ea3b-95a3-472a-82f3-f0adec26bbae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Map">
+      <UniqueIdentifier>{7771a51f-698b-47c3-a3cb-0fecf0006888}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -60,6 +63,9 @@
     <ClCompile Include="Source\Camera\Camera.cpp">
       <Filter>Source\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Map\SeaMine.cpp">
+      <Filter>Source\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameSetting\GameSetting.h">
@@ -88,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="Source\Camera\Camera.h">
       <Filter>Source\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Map\SeaMine.h">
+      <Filter>Source\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

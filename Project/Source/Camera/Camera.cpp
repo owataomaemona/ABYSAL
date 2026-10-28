@@ -19,21 +19,21 @@ void StepCamera()
 	PlayerData player = GetPlayer();
 
 
-	//// スーパーマリオブラザーズ式
-	//float targetX = player.posX - 300.0f; // targetXにプレイヤーの位置を格納
+	// スーパーマリオブラザーズ式
+	float targetX = player.posX - 300.0f; // targetXにプレイヤーの位置を格納
 
-	//if (targetX > g_CameraData.pos.x) // プレイヤーが左に行ったら(新しく計算したカメラの位置(targetX)が現在よりも右側にあるか)
-	//{
-	//	g_CameraData.pos.x = targetX; // カメラの位置を最後左に行く前の位置で固定する(カメラの座標をtargetXに更新する)
-	//}
+	if (targetX > g_CameraData.pos.x) // プレイヤーが左に行ったら(新しく計算したカメラの位置(targetX)が現在よりも右側にあるか)
+	{
+		g_CameraData.pos.x = targetX; // カメラの位置を最後左に行く前の位置で固定する(カメラの座標をtargetXに更新する)
+	}
 
-	//g_CameraData.pos.y = player.posY - 600.0f;
-
-
-
-	// 上下左右カメラ追従
-	g_CameraData.pos.x = player.posX - 300.0f;
 	g_CameraData.pos.y = player.posY - 600.0f;
+
+
+
+	//// 上下左右カメラ追従
+	//g_CameraData.pos.x = player.posX - 300.0f;
+	//g_CameraData.pos.y = player.posY - 600.0f;
 
 
 
