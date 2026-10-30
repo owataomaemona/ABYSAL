@@ -45,7 +45,3 @@ void FinPlayer();
 
 // 取得関数
 PlayerData GetPlayer();
-
-// 当たり判定
-void PlayerHitNormalBlockX(MapChipData mapChipData);
-void PlayerHitNormalBlockY(MapChipData mapChipData);

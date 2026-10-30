@@ -1,6 +1,7 @@
 ﻿#include "DxLib.h"
 #include "Player.h"
 #include "../Input/Input.h"
+#include "../Collision/Collision.h"
 #include "../Camera/Camera.h"
 
 // アニメーション用パラメーター
@@ -57,7 +58,7 @@ void InitPlayer()
 	{
 		InitAnimation(&g_PlayerData.animation[i]);
 	}
-
+	
 }
 
 void LoadPlayer() 

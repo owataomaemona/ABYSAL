@@ -1,7 +1,7 @@
 ﻿#include "DxLib.h"
 #include "../../BackGround/BackGround.h"
 //#include "../../Scene/SceneManager.h"
-//#include "../../Map/MapManager.h"
+#include "../../Map/MapManager.h"
 #include "../../Player/Player.h"
 //#include "../../Collision/Collision.h"
 #include "../../Camera/Camera.h"
@@ -18,8 +18,8 @@ void InitPlayScene()
 	// プレイヤー初期化
 	InitPlayer();
 
-	//// マップ初期化
-	//InitMap();
+	// マップ初期化
+	InitMap();
 
 	// カメラ初期化
 	InitCamera();
@@ -33,8 +33,8 @@ void LoadPlayScene()
 	// プレイヤーロード
 	LoadPlayer();
 
-	//// マップをロード
-	//LoadMap();
+	// マップをロード
+	LoadMap();
 }
 
 void StartPlayScene()
@@ -42,8 +42,8 @@ void StartPlayScene()
 	// プレイヤー開始
 	StartPlayer();
 
-	//// マップを開始
-	//StartMap();
+	// マップを開始
+	StartMap();
 }
 
 void StepPlayScene()
@@ -70,8 +70,8 @@ void DrawPlayScene()
 	// 背景
 	DrawBackGround();
 
-	//// マップ描画
-	//DrawMap();
+	// マップ描画
+	DrawMap();
 
 	// プレイヤー描画
 	DrawPlayer();
@@ -85,8 +85,8 @@ void FinPlayScene()
 	// 背景
 	FinBackGround();
 
-	//// マップ終了
-	//FinMap();
+	// マップ終了
+	FinMap();
 
 	// プレイヤー終了
 	FinPlayer();
