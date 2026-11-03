@@ -1,4 +1,5 @@
-﻿#include "Block.h"
+﻿#include "DxLib.h"
+#include "Block.h"
 #include "../Camera/Camera.h"
 
 BlockData g_Blocks[BLOCK_MAX] = { 0 };
@@ -19,6 +20,10 @@ void LoadBlock()
 {
 	g_BlockHandle[NORMAL_BLOCK] = LoadGraph("Data/Map/Debris1.png");
 	g_BlockHandle[NORMAL_BLOCK_2] = LoadGraph("Data/Map/Debris2.png");
+	g_BlockHandle[NORMAL_BLOCK_3] = LoadGraph("Data/Map/Debris3.png");
+	g_BlockHandle[NORMAL_BLOCK_4] = LoadGraph("Data/Map/Debris4.png");
+	g_BlockHandle[NORMAL_BLOCK_5] = LoadGraph("Data/Map/Debris5.png");
+	g_BlockHandle[NORMAL_BLOCK_6] = LoadGraph("Data/Map/Debris6.png");
 }
 
 void StartBlock()
@@ -46,6 +51,10 @@ void DrawBlock()
 
 void FinBlock()
 {
+	for (int i = 0; i < BLOCK_TYPE_MAX; i++)
+	{
+		DeleteGraph(g_BlockHandle[i]);
+	}
 }
 
 BlockData* CreateBlock(MapChipType type, VECTOR pos)

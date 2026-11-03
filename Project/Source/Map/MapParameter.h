@@ -12,10 +12,23 @@ enum MapChipType
 	MAP_CHIP_NONE,
 	NORMAL_BLOCK,
 	NORMAL_BLOCK_2,
+	NORMAL_BLOCK_3,
+	NORMAL_BLOCK_4,
+	NORMAL_BLOCK_5,
+	NORMAL_BLOCK_6,
+	SEA_MINE_BLOCK,
 	BLOCK_TYPE_MAX,
 };
 
 struct BlockData
+{
+	bool active;
+	int handle;
+	MapChipType type;
+	VECTOR pos;
+};
+
+struct SeaMineData
 {
 	bool active;
 	int handle;

@@ -1,4 +1,5 @@
-﻿#pragma
+﻿#pragma once
+#include "MapParameter.h"
 
 void InitSeaMine();
 void LoadSeaMine();
@@ -7,3 +8,5 @@ void StepSeaMine();
 void DrawSeaMine();
 void FinSeaMine();
 
+SeaMineData* CreateSeaMine(MapChipType type, VECTOR pos);
+SeaMineData* GetSeaMine();

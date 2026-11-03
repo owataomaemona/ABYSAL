@@ -3,6 +3,7 @@
 #include "../GameSetting/GameSetting.h"
 #include "MapParameter.h"
 #include "Block.h"
+#include "SeaMine.h"
 
 MapChipData g_MapChip[MAP_CHIP_Y_NUM][MAP_CHIP_X_NUM] = { 0 };
 
