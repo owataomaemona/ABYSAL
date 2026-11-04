@@ -3,13 +3,15 @@
 #include "../Input/Input.h"
 #include "../Collision/Collision.h"
 #include "../Camera/Camera.h"
+#include "../Map/MapChip.h"
+#include "../Map/MapManager.h"
 
 // アニメーション用パラメーター
 struct PlayerAnimationParam
 {
 	int interval;
 	int frameNum;
-	int width;
+	int width;   //ここの縦横幅は当たり判定ではなく、"画像"としての縦横幅になる
 	int height;
 	bool isLoop; // ここに追加することによって、パラメーターの方だけでループするか否かを設定できる!
 };
@@ -18,7 +20,7 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 	25,2,76,92,true,   // IDLE
 	25,4,80,92,true,   // WALK
 	25,4,88,88,true,   // SWIM
-	3,5,92,92,false,  // DASH
+	3,5,92,92,false,   // DASH
 };
 
 // プレイヤー設定関連
@@ -27,8 +29,8 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 #define PLAYER_MOVE_SPEED (2.0f)
 
 // プレイヤーダッシュ関連
-#define PLAYER_DASH_SPEED (10.0f)
-#define PLAYER_DASH_TIME (12)
+#define PLAYER_DASH_SPEED (12.0f)
+#define PLAYER_DASH_TIME (14)
 
 // ジャンプ力
 #define PLAYER_JUMP_POWER (4.5f)
@@ -44,14 +46,15 @@ void UpdatePlayerAnimation();							 // アニメーション更新
 
 void InitPlayer()
 {
-	g_PlayerData.posX = PLAYER_DEFAULT_POS_X;
-	g_PlayerData.posY = PLAYER_DEFAULT_POS_Y;
-	g_PlayerData.moveX = 0.0f;
-	g_PlayerData.moveY = 0.0f;
+	g_PlayerData.pos = VGet(0.0f, 0.0f, 0.0f);
+	g_PlayerData.move = VGet(0.0f, 0.0f, 0.0f);
+	g_PlayerData.width = 0.0f;
+	g_PlayerData.height = 0.0f;
 	g_PlayerData.isDash = false;
 	g_PlayerData.dashMove = false;
 	g_PlayerData.dashTimer = 0.0f;
 	g_PlayerData.active = false;
+	g_PlayerData.isAir = false;
 	g_PlayerData.playAnim = PLAYER_ANIM_NONE;
 
 	for (int i = 0; i < PLAYER_ANIM_MAX; i++)
@@ -74,6 +77,14 @@ void StartPlayer()
 	// 生存フラグを立てる
 	g_PlayerData.active = true;
 
+	// 初期位置設定
+	g_PlayerData.pos.x = PLAYER_DEFAULT_POS_X;
+	g_PlayerData.pos.y = PLAYER_DEFAULT_POS_Y;
+
+	//　サイズ設定
+	g_PlayerData.width = PLAYER_WIDTH;
+	g_PlayerData.height = PLAYER_HEIGHT;
+
 	// 待機アニメーションから開始する
 	StartPlayerAnimation(PLAYER_ANIM_IDLE);
 }
@@ -90,21 +101,21 @@ void StepPlayer()
 	g_PrevPlayerData = g_PlayerData;
 
 	// X移動量は毎回リセットする
-	g_PlayerData.moveX = 0.0f;
+	g_PlayerData.move.x = 0.0f;
 
 	// Y移動量に重力を反映(重力は下向きのため、プラスで足していく)
-	 g_PlayerData.moveY += PLAYER_GRAVITY;
+	 g_PlayerData.move.y += PLAYER_GRAVITY;
 
 	// 左入力
 	if (IsInputKey(KEY_LEFT))
 	{
-		g_PlayerData.moveX = -PLAYER_MOVE_SPEED;
+		g_PlayerData.move.x = -PLAYER_MOVE_SPEED;
 		g_PlayerData.isTurn = true;
 	}
 	// 右入力
 	else if (IsInputKey(KEY_RIGHT))
 	{
-		g_PlayerData.moveX = PLAYER_MOVE_SPEED;
+		g_PlayerData.move.x = PLAYER_MOVE_SPEED;
 		g_PlayerData.isTurn = false;
 	}
 
@@ -112,7 +123,7 @@ void StepPlayer()
 	if (IsTriggerKey(KEY_Z))
 	{
 		// Y移動量にジャンプ力を与える(上に力を与えるため、マイナスを付ける)
-		g_PlayerData.moveY = -PLAYER_JUMP_POWER;
+		g_PlayerData.move.y = -PLAYER_JUMP_POWER;
 	}
 
 	// V入力(ダッシュしてない時)
@@ -140,7 +151,7 @@ void UpdatePlayer()
 	if (!g_PlayerData.active) return;
 
 	// 上昇しているもしくは落ちている場合は空中フラグを立てる
-	if (g_PlayerData.moveY < 0.0f || g_PlayerData.moveY > PLAYER_GRAVITY)
+	if (g_PlayerData.move.y < 0.0f || g_PlayerData.move.y > PLAYER_GRAVITY)
 	{
 		g_PlayerData.isAir = true;
 	}
@@ -154,11 +165,11 @@ void UpdatePlayer()
 		{
 			if (g_PlayerData.isTurn) // 向きの判定
 			{
-				g_PlayerData.posX -= PLAYER_DASH_SPEED;
+				g_PlayerData.pos.x -= PLAYER_DASH_SPEED;
 			}
 			else
 			{
-				g_PlayerData.posX += PLAYER_DASH_SPEED;
+				g_PlayerData.pos.x += PLAYER_DASH_SPEED;
 			}
 		}
 
@@ -170,8 +181,8 @@ void UpdatePlayer()
 	}
 
 	// 移動処理
-	g_PlayerData.posX += g_PlayerData.moveX;
-	g_PlayerData.posY += g_PlayerData.moveY;
+	g_PlayerData.pos.x += g_PlayerData.move.x;
+	g_PlayerData.pos.y += g_PlayerData.move.y;
 
 	UpdatePlayerAnimation();
 
@@ -179,9 +190,9 @@ void UpdatePlayer()
 	CameraData camera = GetCamera();
 
 	// プレイヤーが画面左側にはみ出さないようにする
-	if (g_PlayerData.posX < camera.pos.x) // プレイヤーの横座標がカメラの横座標より小さくなったら
+	if (g_PlayerData.pos.x < camera.pos.x) // プレイヤーの横座標がカメラの横座標より小さくなったら
 	{
-		g_PlayerData.posX = camera.pos.x; // プレイヤーの横座標をカメラの横座標と同じにする
+		g_PlayerData.pos.x = camera.pos.x; // プレイヤーの横座標をカメラの横座標と同じにする
 	}
 }
 
@@ -196,7 +207,7 @@ void DrawPlayer()
 	// アニメーション描画でプレイヤーを描画する
 	PlayerAnimationType animType = g_PlayerData.playAnim;
 	AnimationData* animData = &g_PlayerData.animation[animType];
-	DrawAnimation(animData, g_PlayerData.posX - camera.pos.x, g_PlayerData.posY - camera.pos.y, g_PlayerData.isTurn);
+	DrawAnimation(animData, g_PlayerData.pos.x - camera.pos.x, g_PlayerData.pos.y - camera.pos.y, g_PlayerData.isTurn);
 
 	// 当たり判定描画
 	//float x, y, w, h;
@@ -230,7 +241,7 @@ void StartPlayerAnimation(PlayerAnimationType anim)
 	PlayerAnimationParam animParam = PLAYER_ANIM_PARAM[anim];
 
 	// アニメーション再生
-	StartAnimation(animData, g_PlayerData.posX, g_PlayerData.posY, animParam.interval, animParam.frameNum, animParam.width, animParam.height, animParam.isLoop);
+	StartAnimation(animData, g_PlayerData.pos.x, g_PlayerData.pos.y, animParam.interval, animParam.frameNum, animParam.width, animParam.height, animParam.isLoop);
 }
 
 void UpdatePlayerAnimation()
@@ -247,7 +258,7 @@ void UpdatePlayerAnimation()
 	if (!g_PlayerData.isAir)
 	{
 		// 横に移動していれば走っている
-		if (g_PlayerData.moveX < 0.0f || g_PlayerData.moveX > 0.0f)
+		if (g_PlayerData.move.x < 0.0f || g_PlayerData.move.x > 0.0f)
 		{
 			// 歩くアニメーション
 			StartPlayerAnimation(PLAYER_ANIM_WALK);
@@ -262,12 +273,12 @@ void UpdatePlayerAnimation()
 	else
 	{
 		// 上昇していればジャンプアニメーション
-		if (g_PlayerData.moveY < 0.0f)
+		if (g_PlayerData.move.y < 0.0f)
 		{
 			StartPlayerAnimation(PLAYER_ANIM_SWIM);
 		}
 		// 下降していれば落下アニメーション
-		else if (g_PlayerData.moveY > 0.0f)
+		else if (g_PlayerData.move.y > 0.0f)
 		{
 			StartPlayerAnimation(PLAYER_ANIM_SWIM);
 		}

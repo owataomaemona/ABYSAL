@@ -1,6 +1,7 @@
 ﻿#include "MapManager.h"
 #include "MapParameter.h"
 #include "MapChip.h"
+#include "../Collision/Collision.h"
 #include "Block.h"
 #include "SeaMine.h"
 #include "../Player/Player.h"
@@ -39,4 +40,10 @@ void DrawMap()
 
 void FinMap()
 {
+}
+
+void CheckMapPlayer() 
+{
+	PlayerData player = GetPlayer();
+	
 }

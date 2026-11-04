@@ -26,10 +26,10 @@ struct PlayerData
 	bool isDash;                                // ダッシュ中
 	bool dashMove;                              // 移動するダッシュか(止まってる状態の時のことも考慮)
 	float dashTimer;                            // ダッシュ時間
-	float posX;									// X座標
-	float posY;									// Y座標
-	float moveX;								// X移動量
-	float moveY;								// Y移動量
+	VECTOR pos;                                 // 座標
+	VECTOR move;                                // 移動量
+	float width;                                // 横幅格納用
+	float height;                               // 縦幅格納用
 	AnimationData animation[PLAYER_ANIM_MAX];	// アニメーション
 	PlayerAnimationType playAnim;				// 再生中のアニメーション
 };

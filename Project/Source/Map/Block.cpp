@@ -13,6 +13,9 @@ void InitBlock()
 		block->active = false;
 		block->pos = VGet(0.0f, 0.0f, 0.0f);
 		block->type = MAP_CHIP_NONE;
+		// サイズは固定
+		block->width = 0.0f;
+		block->height = 0.0f;
 	}
 }
 
@@ -70,6 +73,9 @@ BlockData* CreateBlock(MapChipType type, VECTOR pos)
 			block->handle = g_BlockHandle[type];
 			block->pos = pos;
 			block->type = type;
+			// サイズは固定
+			block->width = MAP_CHIP_WIDTH;
+			block->height = MAP_CHIP_HEIGHT;
 			return block;
 		}
 	}

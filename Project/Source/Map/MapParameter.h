@@ -10,22 +10,24 @@
 enum MapChipType
 {
 	MAP_CHIP_NONE,
-	NORMAL_BLOCK,
-	NORMAL_BLOCK_2,
-	NORMAL_BLOCK_3,
-	NORMAL_BLOCK_4,
-	NORMAL_BLOCK_5,
-	NORMAL_BLOCK_6,
-	SEA_MINE_BLOCK,
+	NORMAL_BLOCK,   // ここから
+	NORMAL_BLOCK_2, // 
+	NORMAL_BLOCK_3, //
+	NORMAL_BLOCK_4, //
+	NORMAL_BLOCK_5, //
+	NORMAL_BLOCK_6, // ここまでブロック
+	SEA_MINE_BLOCK, // 機雷
 	BLOCK_TYPE_MAX,
 };
 
-struct BlockData
+struct BlockData // ここにマップ上に表示する全てのブロックのデータを書く
 {
 	bool active;
 	int handle;
 	MapChipType type;
 	VECTOR pos;
+	float width;
+	float height;
 };
 
 struct MapChipData
