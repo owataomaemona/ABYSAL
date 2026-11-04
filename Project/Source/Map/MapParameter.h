@@ -33,5 +33,5 @@ struct BlockData // ここにマップ上に表示する全てのブロックの
 struct MapChipData
 {
 	int mapChip;
-	BlockData* data;
+	BlockData* block;
 };

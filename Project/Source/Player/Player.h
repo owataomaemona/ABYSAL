@@ -44,4 +44,5 @@ void DrawPlayer();
 void FinPlayer();
 
 // 取得関数
-PlayerData GetPlayer();
+PlayerData* GetPlayer();
+PlayerData CopyPlayer();

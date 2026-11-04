@@ -41,10 +41,10 @@ void CreateMap()
 			VECTOR pos = VGet(j * MAP_CHIP_WIDTH, i * MAP_CHIP_HEIGHT, 0.0f);
 			
 			// 生成したブロックはMapChipDataで参照しておく
-			g_MapChip[i][j].data = CreateBlock(type, pos);
+			g_MapChip[i][j].block = CreateBlock(type, pos);
 			
 			// 生成した機雷もMapChipDataで参照しておく
-			g_MapChip[i][j].data = CreateSeaMine(type, pos);
+			g_MapChip[i][j].block = CreateSeaMine(type, pos);
 		}
 	}
 }

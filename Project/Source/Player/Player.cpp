@@ -223,7 +223,12 @@ void FinPlayer()
 	}
 }
 
-PlayerData GetPlayer()
+PlayerData* GetPlayer()
+{
+	return &g_PlayerData;
+}
+
+PlayerData CopyPlayer()
 {
 	return g_PlayerData;
 }
