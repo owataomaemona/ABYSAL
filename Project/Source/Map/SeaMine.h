@@ -8,5 +8,5 @@ void StepSeaMine();
 void DrawSeaMine();
 void FinSeaMine();
 
-SeaMineData* CreateSeaMine(MapChipType type, VECTOR pos);
-SeaMineData* GetSeaMine();
+BlockData* CreateSeaMine(MapChipType type, VECTOR pos);
+BlockData* GetSeaMine();

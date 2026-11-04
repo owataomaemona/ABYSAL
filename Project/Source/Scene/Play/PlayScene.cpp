@@ -3,7 +3,7 @@
 //#include "../../Scene/SceneManager.h"
 #include "../../Map/MapManager.h"
 #include "../../Player/Player.h"
-//#include "../../Collision/Collision.h"
+#include "../../Collision/Collision.h"
 #include "../../Camera/Camera.h"
 
 
@@ -61,8 +61,8 @@ void UpdatePlayScene()
 	// プレイヤー更新
 	UpdatePlayer();
 
-	//// 当たり判定
-	//CheckCollision();
+	// 当たり判定
+	CheckCollision();
 }
 
 void DrawPlayScene()

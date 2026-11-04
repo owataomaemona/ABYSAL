@@ -1,16 +1,16 @@
-#include "DxLib.h"
+ï»¿#include "DxLib.h"
 #include "../Camera/Camera.h"
 #include "../Map/SeaMine.h"
 
 #define SEA_MINE_WIDTH  (144.0f)
 #define SEA_MINE_HEIGHT (144.0f)
 
-SeaMineData g_SeaMines[BLOCK_MAX] = { 0 };
+BlockData g_SeaMines[BLOCK_MAX] = { 0 };
 int g_SeaMineHandle[BLOCK_TYPE_MAX] = { 0 };
 
 void InitSeaMine()
 {
-	SeaMineData* mine = g_SeaMines;
+	BlockData* mine = g_SeaMines;
 	for (int i = 0; i < BLOCK_MAX; i++, mine++)
 	{
 		mine->active = false;
@@ -34,10 +34,10 @@ void StepSeaMine()
 
 void DrawSeaMine()
 {
-	// ƒXƒNƒ[ƒ‹‚Ì‚½‚ßƒJƒƒ‰‚ğæ“¾
+	// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã®ãŸã‚ã‚«ãƒ¡ãƒ©ã‚’å–å¾—
 	CameraData camera = GetCamera();
 
-	SeaMineData* mine = g_SeaMines;
+	BlockData* mine = g_SeaMines;
 	for (int i = 0; i < BLOCK_MAX; i++, mine++)
 	{
 		if (mine->active)
@@ -49,17 +49,21 @@ void DrawSeaMine()
 
 void FinSeaMine()
 {
+	for (int i = 0; i < BLOCK_TYPE_MAX; i++)
+	{
+		DeleteGraph(g_SeaMineHandle[i]);
+	}
 }
 
-SeaMineData* CreateSeaMine(MapChipType type, VECTOR pos) 
+BlockData* CreateSeaMine(MapChipType type, VECTOR pos)
 {
-	// –¢g—p‚ÌƒuƒƒbƒN‚ğ’T‚·
-	SeaMineData* mine = g_SeaMines;
+	// æœªä½¿ç”¨ã®ãƒ–ãƒ­ãƒƒã‚¯ã‚’æ¢ã™
+	BlockData* mine = g_SeaMines;
 	for (int i = 0; i < BLOCK_MAX; i++, mine++)
 	{
 		if (!mine->active) 
 		{
-			// ‹@—‹¶¬
+			// æ©Ÿé›·ç”Ÿæˆ
 			mine->active = true;
 			mine->handle = g_SeaMineHandle[type];
 			mine->pos = pos;
@@ -71,7 +75,7 @@ SeaMineData* CreateSeaMine(MapChipType type, VECTOR pos)
 	return nullptr;
 }
 
-SeaMineData* GetSeaMine()
+BlockData* GetSeaMine()
 {
 	return g_SeaMines;
 }

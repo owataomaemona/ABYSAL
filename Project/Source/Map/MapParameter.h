@@ -28,14 +28,6 @@ struct BlockData
 	VECTOR pos;
 };
 
-struct SeaMineData
-{
-	bool active;
-	int handle;
-	MapChipType type;
-	VECTOR pos;
-};
-
 struct MapChipData
 {
 	int mapChip;
