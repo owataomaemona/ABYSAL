@@ -21,6 +21,7 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 	25,4,80,92,true,   // WALK
 	25,4,88,88,true,   // SWIM
 	3,5,92,92,false,   // DASH
+	6,6,64,64,false,   // FLASH
 };
 
 // プレイヤー設定関連
@@ -71,6 +72,7 @@ void LoadPlayer()
 	g_PlayerData.animation[PLAYER_ANIM_WALK].handle = LoadGraph("Data/Player/DiverWalk.png");
 	g_PlayerData.animation[PLAYER_ANIM_SWIM].handle = LoadGraph("Data/Player/DiverSwim.png");
 	g_PlayerData.animation[PLAYER_ANIM_DASH].handle = LoadGraph("Data/Player/DiverDash.png");
+	g_PlayerData.animation[PLAYER_ANIM_FLASH].handle = LoadGraph("Data/Player/DiverFlash.png");
 }
 
 void StartPlayer() 
@@ -132,6 +134,8 @@ void StepPlayer()
 	{
 		g_PlayerData.isDash = true;
 		g_PlayerData.dashTimer = PLAYER_DASH_TIME;
+
+		StartPlayerAnimation(PLAYER_ANIM_FLASH);
 
 		StartPlayerAnimation(PLAYER_ANIM_DASH);
 

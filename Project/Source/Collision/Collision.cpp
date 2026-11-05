@@ -94,7 +94,7 @@ bool CheckCirclePoint(float circlePosX, float circlePosY, float circleRadius, fl
 	return false;
 }
 
-// 円と点の当たり判定
+// 円と円の当たり判定
 // 引数
 // circleA_PosX:円Aの中心座標（X）
 // circleA_PosY:円Aの中心座用（Y）

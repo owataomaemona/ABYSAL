@@ -13,6 +13,7 @@ enum PlayerAnimationType
 	PLAYER_ANIM_WALK,
 	PLAYER_ANIM_SWIM,
 	PLAYER_ANIM_DASH,
+	PLAYER_ANIM_FLASH,
 	PLAYER_ANIM_MAX,
 	PLAYER_ANIM_NONE = -1
 };
@@ -27,7 +28,7 @@ struct PlayerData
 	bool dashMove;                              // 移動するダッシュか(止まってる状態の時のことも考慮)
 	float dashTimer;                            // ダッシュ時間
 	VECTOR pos;                                 // 座標
-	VECTOR beforePos;
+	VECTOR beforePos;                           // 前にいた座標
 	VECTOR move;                                // 移動量
 	float width;                                // 横幅格納用
 	float height;                               // 縦幅格納用
