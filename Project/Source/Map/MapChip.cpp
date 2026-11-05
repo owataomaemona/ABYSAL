@@ -44,7 +44,7 @@ void CreateMap()
 			g_MapChip[i][j].block = CreateBlock(type, pos);
 			
 			// 生成した機雷もMapChipDataで参照しておく
-			g_MapChip[i][j].block = CreateSeaMine(type, pos);
+			g_MapChip[i][j].seaMine = CreateSeaMine(type, pos);
 		}
 	}
 }

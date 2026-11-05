@@ -5,12 +5,12 @@
 #define SEA_MINE_WIDTH  (144.0f)
 #define SEA_MINE_HEIGHT (144.0f)
 
-BlockData g_SeaMines[BLOCK_MAX] = { 0 };
+SeaMineData g_SeaMines[BLOCK_MAX] = { 0 };
 int g_SeaMineHandle[BLOCK_TYPE_MAX] = { 0 };
 
 void InitSeaMine()
 {
-	BlockData* mine = g_SeaMines;
+	SeaMineData* mine = g_SeaMines;
 	for (int i = 0; i < BLOCK_MAX; i++, mine++)
 	{
 		mine->active = false;
@@ -37,7 +37,7 @@ void DrawSeaMine()
 	// スクロールのためカメラを取得
 	CameraData camera = GetCamera();
 
-	BlockData* mine = g_SeaMines;
+	SeaMineData* mine = g_SeaMines;
 	for (int i = 0; i < BLOCK_MAX; i++, mine++)
 	{
 		if (mine->active)
@@ -55,10 +55,10 @@ void FinSeaMine()
 	}
 }
 
-BlockData* CreateSeaMine(MapChipType type, VECTOR pos)
+SeaMineData* CreateSeaMine(MapChipType type, VECTOR pos)
 {
 	// 未使用のブロックを探す
-	BlockData* mine = g_SeaMines;
+	SeaMineData* mine = g_SeaMines;
 	for (int i = 0; i < BLOCK_MAX; i++, mine++)
 	{
 		if (!mine->active) 
@@ -68,6 +68,8 @@ BlockData* CreateSeaMine(MapChipType type, VECTOR pos)
 			mine->handle = g_SeaMineHandle[type];
 			mine->pos = pos;
 			mine->type = type;
+			mine->width = SEA_MINE_WIDTH;
+			mine->height = SEA_MINE_HEIGHT;
 			return mine;
 		}
 	}
@@ -75,7 +77,7 @@ BlockData* CreateSeaMine(MapChipType type, VECTOR pos)
 	return nullptr;
 }
 
-BlockData* GetSeaMine()
+SeaMineData* GetSeaMine()
 {
 	return g_SeaMines;
 }

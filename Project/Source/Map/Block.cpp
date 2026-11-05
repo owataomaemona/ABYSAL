@@ -13,9 +13,6 @@ void InitBlock()
 		block->active = false;
 		block->pos = VGet(0.0f, 0.0f, 0.0f);
 		block->type = MAP_CHIP_NONE;
-		// サイズは固定
-		block->width = 0.0f;
-		block->height = 0.0f;
 	}
 }
 

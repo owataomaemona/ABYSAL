@@ -20,7 +20,17 @@ enum MapChipType
 	BLOCK_TYPE_MAX,
 };
 
-struct BlockData // ここにマップ上に表示する全てのブロックのデータを書く
+struct BlockData 
+{
+	bool active;
+	int handle;
+	MapChipType type;
+	VECTOR pos;
+	float width;
+	float height;
+};
+
+struct SeaMineData
 {
 	bool active;
 	int handle;
@@ -34,4 +44,5 @@ struct MapChipData
 {
 	int mapChip;
 	BlockData* block;
+	SeaMineData* seaMine;
 };

@@ -157,8 +157,6 @@ void UpdatePlayer()
 		g_PlayerData.isAir = true;
 	}
 
-	CheckMapPlayer();
-
 	// ダッシュ中か確認
 	if (g_PlayerData.isDash)
 	{
