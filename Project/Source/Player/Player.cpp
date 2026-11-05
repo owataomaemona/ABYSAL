@@ -135,8 +135,6 @@ void StepPlayer()
 		g_PlayerData.isDash = true;
 		g_PlayerData.dashTimer = PLAYER_DASH_TIME;
 
-		StartPlayerAnimation(PLAYER_ANIM_FLASH);
-
 		StartPlayerAnimation(PLAYER_ANIM_DASH);
 
 		if (IsInputKey(KEY_LEFT) || IsInputKey(KEY_RIGHT)) 
