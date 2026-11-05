@@ -48,6 +48,7 @@ void InitPlayer()
 {
 	g_PlayerData.pos = VGet(0.0f, 0.0f, 0.0f);
 	g_PlayerData.move = VGet(0.0f, 0.0f, 0.0f);
+	g_PlayerData.beforePos = VGet(0.0f, 0.0f, 0.0f);
 	g_PlayerData.width = 0.0f;
 	g_PlayerData.height = 0.0f;
 	g_PlayerData.isDash = false;
@@ -156,6 +157,8 @@ void UpdatePlayer()
 		g_PlayerData.isAir = true;
 	}
 
+	CheckMapPlayer();
+
 	// ダッシュ中か確認
 	if (g_PlayerData.isDash)
 	{
@@ -179,6 +182,8 @@ void UpdatePlayer()
 			g_PlayerData.dashMove = false;
 		}
 	}
+
+	g_PlayerData.beforePos = g_PlayerData.pos;
 
 	// 移動処理
 	g_PlayerData.pos.x += g_PlayerData.move.x;

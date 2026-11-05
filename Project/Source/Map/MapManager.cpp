@@ -9,6 +9,9 @@
 // キャラクターの周囲何マスまでチェックするか
 #define CHECK_ROUND_NUM (2)
 
+// 当たり判定小数誤差許容値
+#define COLLISION_EPS (0.001f)
+
 void InitMap()
 {
 }
@@ -45,14 +48,10 @@ void FinMap()
 void CheckMapPlayer() 
 {
 	PlayerData* player = GetPlayer();
-	PlayerData temp = CopyPlayer();
-
+	
 	// 今のとこ)プレイヤーが生きているとき
 	if (player->active)
-	{
-		// X軸だけ移動する
-		temp.pos.x += temp.move.x;
-
+	{	
 		// マップチップと当たり判定＆押し出し
 		for (int y = 0; y < MAP_CHIP_Y_NUM; y++)
 		{
@@ -63,31 +62,28 @@ void CheckMapPlayer()
 				// マップチップが0の場合は何もない
 				if (mapChipData.mapChip == 0) continue;
 
-				if (CheckSquareSquare(temp.pos.x, temp.pos.y, temp.width, temp.height,
+				if (CheckSquareSquare(player->pos.x, player->beforePos.y, player->width, player->height,
 					mapChipData.block->pos.x, mapChipData.block->pos.y, mapChipData.block->width, mapChipData.block->height))
 				{
 					// 左から当たったか
-					if (temp.move.x > 0.0f)
+					if (player->move.x > 0.0f)
 					{
 						// 左に押し出す
-						player->pos.x -= (temp.pos.x + temp.width) - mapChipData.block->pos.x;
+						player->pos.x -= (player->pos.x + player->width) - mapChipData.block->pos.x;
 					}
 					// 右から当たったか
-					else if (temp.move.x < 0.0f)
+					else if (player->move.x < 0.0f)
 					{
 						// 右に押し出す
-						player->pos.x += (mapChipData.block->pos.x + mapChipData.block->width) - temp.pos.x;
+						player->pos.x += (mapChipData.block->pos.x + mapChipData.block->width) - player->pos.x;
 					}
 
 					// 移動量は0にする
-					temp.move.x = 0.0f;
+					player->move.x = 0.0f;
 				}
 			}
 		}
 
-		// Y軸だけ移動する
-		temp.pos.y += player->move.y;
-
 		// マップチップと当たり判定＆押し出し
 		for (int y = 0; y < MAP_CHIP_Y_NUM; y++)
 		{
@@ -98,14 +94,14 @@ void CheckMapPlayer()
 				// マップチップが0の場合は何もない
 				if (mapChipData.mapChip == 0) continue;
 
-				if (CheckSquareSquare(temp.pos.x, temp.pos.y, player->width, player->height,
+				if (CheckSquareSquare(player->pos.x, player->pos.y, player->width, player->height,
 					mapChipData.block->pos.x, mapChipData.block->pos.y, mapChipData.block->width, mapChipData.block->height))
 				{
 					// 上から当たったか
 					if (player->move.y > 0.0f)
 					{
 						// 上に押し出す
-						player->pos.y -= (temp.pos.y + player->height) - mapChipData.block->pos.y;
+						player->pos.y -= (player->pos.y + player->height) - mapChipData.block->pos.y;
 						
 						// 空中フラグを折る
 						player->isAir = false;
@@ -114,7 +110,7 @@ void CheckMapPlayer()
 					else if (player->move.y < 0.0f)
 					{
 						// 下に押し出す
-						player->pos.y += (mapChipData.block->pos.y + mapChipData.block->height) - temp.pos.y;
+						player->pos.y += (mapChipData.block->pos.y + mapChipData.block->height) - player->pos.y;
 					}
 
 					// 移動量は0にする

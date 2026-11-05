@@ -27,6 +27,7 @@ struct PlayerData
 	bool dashMove;                              // 移動するダッシュか(止まってる状態の時のことも考慮)
 	float dashTimer;                            // ダッシュ時間
 	VECTOR pos;                                 // 座標
+	VECTOR beforePos;
 	VECTOR move;                                // 移動量
 	float width;                                // 横幅格納用
 	float height;                               // 縦幅格納用
