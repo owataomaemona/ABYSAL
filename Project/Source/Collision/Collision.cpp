@@ -124,5 +124,8 @@ void CheckCollision()
 
 	// プレイヤーとマップの当たり判定
 	CheckMapPlayer();
+
+	// プレイヤーと機雷の当たり判定
+	CheckSeaMinePlayer();
 }
 

@@ -9,3 +9,4 @@ void DrawMap();
 void FinMap();
 
 void CheckMapPlayer();
+void CheckSeaMinePlayer();

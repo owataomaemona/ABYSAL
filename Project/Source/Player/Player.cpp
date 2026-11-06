@@ -299,3 +299,21 @@ void UpdatePlayerAnimation()
 	AnimationData* animData = &g_PlayerData.animation[animType];
 	UpdateAnimation(animData);
 }
+
+void PlayerDead() 
+{
+	// 本当はやりたいことがるけど一応死亡する
+	g_PlayerData.active = false;
+}
+
+void PlayerHitSeaMine() 
+{
+	if (g_PlayerData.isDash) 
+	{
+		g_PlayerData.active = true;
+	}
+	else
+	{
+		PlayerDead();
+	}
+}

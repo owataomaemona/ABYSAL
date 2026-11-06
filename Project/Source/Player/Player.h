@@ -48,3 +48,6 @@ void FinPlayer();
 // 取得関数
 PlayerData* GetPlayer();
 PlayerData CopyPlayer();
+
+// 当たり判定(マップは別である)
+void PlayerHitSeaMine();

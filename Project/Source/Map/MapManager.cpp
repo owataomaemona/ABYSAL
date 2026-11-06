@@ -49,7 +49,7 @@ void CheckMapPlayer()
 {
 	PlayerData* player = GetPlayer();
 	
-	// 今のとこ)プレイヤーが生きているとき
+	// プレイヤーが生きているとき
 	if (player->active)
 	{	
 		// マップチップと当たり判定＆押し出し
@@ -94,6 +94,7 @@ void CheckMapPlayer()
 				// マップチップが0の場合は何もない
 				if (mapChipData.mapChip == 0) continue;
 
+				// 矩形と矩形で当たり判定を取る
 				if (CheckSquareSquare(player->pos.x, player->pos.y, player->width, player->height,
 					mapChipData.block->pos.x, mapChipData.block->pos.y, mapChipData.block->width, mapChipData.block->height))
 				{
@@ -115,6 +116,39 @@ void CheckMapPlayer()
 
 					// 移動量は0にする
 					player->move.y = 0.0f;
+				}
+			}
+		}
+	}
+}
+
+void CheckSeaMinePlayer() 
+{
+	PlayerData* player = GetPlayer();
+
+	if (player->active) 
+	{
+		float playerCenterX = player->pos.x + PLAYER_WIDTH / 2;
+		float playerCenterY = player->pos.y + PLAYER_HEIGHT / 2;
+
+		for (int y = 0; y < MAP_CHIP_Y_NUM; y++)
+		{
+			for (int x = 0; x < MAP_CHIP_X_NUM; x++)
+			{
+				// マップチップ取得
+				MapChipData mapChipData = GetMapChipData(x, y);
+				// マップチップがSEA_MINE_BLOCK以外の場合は何もしない
+				if (mapChipData.mapChip != SEA_MINE_BLOCK) continue;
+
+				float seaMineCenterX = mapChipData.seaMine->pos.x + SEA_MINE_WIDTH / 2;
+				float seaMineCenterY = mapChipData.seaMine->pos.y + SEA_MINE_HEIGHT / 2;
+
+				// 円で当たり判定を取る
+				if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_RADIUS,
+					seaMineCenterX, seaMineCenterY, SEA_MINE_RADIUS))
+				{
+					PlayerHitSeaMine();
+					SeaMineHitPlayer();
 				}
 			}
 		}

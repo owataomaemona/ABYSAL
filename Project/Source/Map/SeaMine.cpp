@@ -2,9 +2,6 @@
 #include "../Camera/Camera.h"
 #include "../Map/SeaMine.h"
 
-#define SEA_MINE_WIDTH  (144.0f)
-#define SEA_MINE_HEIGHT (144.0f)
-
 SeaMineData g_SeaMines[BLOCK_MAX] = { 0 };
 int g_SeaMineHandle[BLOCK_TYPE_MAX] = { 0 };
 
@@ -70,6 +67,7 @@ SeaMineData* CreateSeaMine(MapChipType type, VECTOR pos)
 			mine->type = type;
 			mine->width = SEA_MINE_WIDTH;
 			mine->height = SEA_MINE_HEIGHT;
+			mine->radius = SEA_MINE_RADIUS;
 			return mine;
 		}
 	}
@@ -80,4 +78,17 @@ SeaMineData* CreateSeaMine(MapChipType type, VECTOR pos)
 SeaMineData* GetSeaMine()
 {
 	return g_SeaMines;
+}
+
+void SeaMineDead()
+{
+	SeaMineData* mine = g_SeaMines;
+
+	// 衝突したら死亡
+	mine->active = false;
+}
+
+void SeaMineHitPlayer() 
+{
+	SeaMineDead();
 }

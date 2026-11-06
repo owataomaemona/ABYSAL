@@ -36,6 +36,7 @@ struct SeaMineData
 	int handle;
 	MapChipType type;
 	VECTOR pos;
+	float radius;
 	float width;
 	float height;
 };
