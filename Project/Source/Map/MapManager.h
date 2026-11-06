@@ -10,3 +10,4 @@ void FinMap();
 
 void CheckMapPlayer();
 void CheckSeaMinePlayer();
+void CheckInvisiblePlayer();

@@ -4,6 +4,7 @@
 #include "MapParameter.h"
 #include "Block.h"
 #include "SeaMine.h"
+#include "Invisible.h"
 
 MapChipData g_MapChip[MAP_CHIP_Y_NUM][MAP_CHIP_X_NUM] = { 0 };
 
@@ -45,6 +46,9 @@ void CreateMap()
 			
 			// 生成した機雷もMapChipDataで参照しておく
 			g_MapChip[i][j].seaMine = CreateSeaMine(type, pos);
+
+			// 生成した透明ブロックはMapChipDataで参照しておく
+			g_MapChip[i][j].invisible = CreateInvisible(type, pos);
 		}
 	}
 }

@@ -3,7 +3,7 @@
 
 #define BLOCK_MAX 1024
 #define MAP_CHIP_X_NUM (154)
-#define MAP_CHIP_Y_NUM (43)
+#define MAP_CHIP_Y_NUM (44)
 #define MAP_CHIP_WIDTH (50.0f)
 #define MAP_CHIP_HEIGHT (50.0f)
 
@@ -17,6 +17,7 @@ enum MapChipType
 	NORMAL_BLOCK_5, //
 	NORMAL_BLOCK_6, // ここまでブロック
 	SEA_MINE_BLOCK, // 機雷
+	INVISIBLE_BLOCK,// 透明ブロック(天井や床用)
 	BLOCK_TYPE_MAX,
 };
 
@@ -41,9 +42,20 @@ struct SeaMineData
 	float height;
 };
 
+struct InvisibleData
+{
+	bool active;
+	int handle;
+	MapChipType type;
+	VECTOR pos;
+	float width;
+	float height;
+};
+
 struct MapChipData
 {
 	int mapChip;
 	BlockData* block;
 	SeaMineData* seaMine;
+	InvisibleData* invisible;
 };

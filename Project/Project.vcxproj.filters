@@ -81,6 +81,9 @@
     <ClCompile Include="Source\Collision\Collision.cpp">
       <Filter>Source\Collision</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Map\Invisible.cpp">
+      <Filter>Source\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameSetting\GameSetting.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="Source\Collision\Collision.h">
       <Filter>Source\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Map\Invisible.h">
+      <Filter>Source\Map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

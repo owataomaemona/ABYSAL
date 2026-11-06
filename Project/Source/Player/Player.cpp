@@ -26,7 +26,7 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 
 // プレイヤー設定関連
 #define PLAYER_DEFAULT_POS_X (100.0f)
-#define PLAYER_DEFAULT_POS_Y (600.0f)
+#define PLAYER_DEFAULT_POS_Y (2000.0f)
 #define PLAYER_MOVE_SPEED (2.0f)
 
 // プレイヤーダッシュ関連
@@ -302,18 +302,11 @@ void UpdatePlayerAnimation()
 
 void PlayerDead() 
 {
-	// 本当はやりたいことがるけど一応死亡する
+	// 本当はやりたいことがあるけど一応死亡する
 	g_PlayerData.active = false;
 }
 
 void PlayerHitSeaMine() 
 {
-	if (g_PlayerData.isDash) 
-	{
-		g_PlayerData.active = true;
-	}
-	else
-	{
-		PlayerDead();
-	}
+	PlayerDead();
 }
