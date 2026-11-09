@@ -50,6 +50,8 @@ void DrawMap()
 
 void FinMap()
 {
+	// 機雷終了
+	FinSeaMine();
 }
 
 void CheckMapPlayer() 
@@ -66,8 +68,10 @@ void CheckMapPlayer()
 			{
 				// マップチップ取得
 				MapChipData mapChipData = GetMapChipData(x, y);
-				// マップチップが0の場合は何もない
-				if (mapChipData.mapChip == 0) continue;
+				// マップチップが以下と0の場合は何もない
+				if (mapChipData.mapChip == SEA_MINE_BLOCK ||
+					mapChipData.mapChip == INVISIBLE_BLOCK ||
+					mapChipData.mapChip == 0) continue;
 
 				if (CheckSquareSquare(player->pos.x, player->beforePos.y, player->width, player->height,
 					mapChipData.block->pos.x, mapChipData.block->pos.y, mapChipData.block->width, mapChipData.block->height))
@@ -98,8 +102,10 @@ void CheckMapPlayer()
 			{
 				// マップチップ取得
 				MapChipData mapChipData = GetMapChipData(x, y);
-				// マップチップが0の場合は何もない
-				if (mapChipData.mapChip == 0) continue;
+				// マップチップが以下と0の場合は何もない
+				if (mapChipData.mapChip == SEA_MINE_BLOCK ||
+					mapChipData.mapChip == INVISIBLE_BLOCK ||
+					mapChipData.mapChip == 0) continue;
 
 				// 矩形と矩形で当たり判定を取る
 				if (CheckSquareSquare(player->pos.x, player->pos.y, player->width, player->height,
@@ -144,7 +150,7 @@ void CheckSeaMinePlayer()
 			{
 				// マップチップ取得
 				MapChipData mapChipData = GetMapChipData(x, y);
-				// マップチップがSEA_MINE_BLOCK以外の場合は何もしない
+				// マップチップがSEA_MINE_BLOCK以外と0の場合は何もしない
 				if (mapChipData.mapChip != SEA_MINE_BLOCK) continue;
 
 				float seaMineCenterX = mapChipData.seaMine->pos.x + SEA_MINE_WIDTH / 2;
