@@ -138,7 +138,7 @@ void CheckMapPlayer()
 void CheckSeaMinePlayer() 
 {
 	PlayerData* player = GetPlayer();
-
+	
 	if (player->active) 
 	{
 		float playerCenterX = player->pos.x + PLAYER_WIDTH / 2;
@@ -150,8 +150,11 @@ void CheckSeaMinePlayer()
 			{
 				// マップチップ取得
 				MapChipData mapChipData = GetMapChipData(x, y);
-				// マップチップがSEA_MINE_BLOCK以外と0の場合は何もしない
+				// マップチップがSEA_MINE_BLOCK以外の場合は何もしない
 				if (mapChipData.mapChip != SEA_MINE_BLOCK) continue;
+
+				// 機雷のポインタが空でないか確認
+				if (mapChipData.seaMine == nullptr) continue;
 
 				float seaMineCenterX = mapChipData.seaMine->pos.x + SEA_MINE_WIDTH / 2;
 				float seaMineCenterY = mapChipData.seaMine->pos.y + SEA_MINE_HEIGHT / 2;
@@ -161,7 +164,7 @@ void CheckSeaMinePlayer()
 					seaMineCenterX, seaMineCenterY, SEA_MINE_RADIUS))
 				{
 					PlayerHitSeaMine();
-					SeaMineHitPlayer();
+					SeaMineHitPlayer(mapChipData.seaMine);
 				}
 			}
 		}

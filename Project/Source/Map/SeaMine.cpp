@@ -80,15 +80,15 @@ SeaMineData* GetSeaMine()
 	return g_SeaMines;
 }
 
-void SeaMineDead()
+void SeaMineDead(SeaMineData* mine)
 {
-	SeaMineData* mine = g_SeaMines;
-
-	// 衝突したら死亡
-	mine->active = false;
+	if (mine != nullptr) 
+	{
+		mine->active = false;
+	}
 }
 
-void SeaMineHitPlayer() 
+void SeaMineHitPlayer(SeaMineData* mine) 
 {
-	SeaMineDead();
+	SeaMineDead(mine);
 }

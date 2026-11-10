@@ -16,4 +16,4 @@ SeaMineData* CreateSeaMine(MapChipType type, VECTOR pos);
 SeaMineData* GetSeaMine();
 
 // 当たり判定
-void SeaMineHitPlayer();
+void SeaMineHitPlayer(SeaMineData* mine);
