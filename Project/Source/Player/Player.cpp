@@ -214,10 +214,6 @@ void DrawPlayer()
 	AnimationData* animData = &g_PlayerData.animation[animType];
 	DrawAnimation(animData, g_PlayerData.pos.x - camera.pos.x, g_PlayerData.pos.y - camera.pos.y, g_PlayerData.isTurn);
 
-	// 当たり判定描画
-	//float x, y, w, h;
-	//CalcBoxCollision(g_PlayerData, x, y, w, h);
-	//DrawBox((int)x, (int)y, (int)(x + w), (int)(y + h), GetColor(255, 255, 255), false);
 }
 
 void FinPlayer()

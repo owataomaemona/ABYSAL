@@ -5,6 +5,7 @@
 #include "../../Player/Player.h"
 #include "../../Collision/Collision.h"
 #include "../../Camera/Camera.h"
+#include "../../Animation/Effect.h"
 
 
 // 背景のスピード
@@ -17,6 +18,9 @@ void InitPlayScene()
 
 	// プレイヤー初期化
 	InitPlayer();
+
+	// エフェクト初期化
+	InitEffectAnimation();
 
 	// マップ初期化
 	InitMap();
@@ -32,6 +36,9 @@ void LoadPlayScene()
 
 	// プレイヤーロード
 	LoadPlayer();
+
+	// エフェクトロード
+	LoadEffectAnimation();
 
 	// マップをロード
 	LoadMap();
@@ -50,6 +57,9 @@ void StepPlayScene()
 {
 	// プレイヤーステップ
 	StepPlayer();
+
+	// エフェクトステップ
+	StepEffectAnimation();
 
 	// カメラステップ
 	StepCamera();
@@ -76,6 +86,9 @@ void DrawPlayScene()
 	// プレイヤー描画
 	DrawPlayer();
 
+	// エフェクト描画
+	DrawEffectAnimation();
+
 	// カメラ描画
 	DrawCamera();
 }
@@ -90,4 +103,7 @@ void FinPlayScene()
 
 	// プレイヤー終了
 	FinPlayer();
+
+	// エフェクト終了
+	FinEffectAnimation();
 }

@@ -1,6 +1,7 @@
 ﻿#include "DxLib.h"
 #include "../Camera/Camera.h"
 #include "../Map/SeaMine.h"
+#include "../Animation/Effect.h"
 
 SeaMineData g_SeaMines[BLOCK_MAX] = { 0 };
 int g_SeaMineHandle[BLOCK_TYPE_MAX] = { 0 };
@@ -82,9 +83,19 @@ SeaMineData* GetSeaMine()
 
 void SeaMineDead(SeaMineData* mine)
 {
-	if (mine != nullptr) 
+	if (mine != nullptr && mine->active)
 	{
 		mine->active = false;
+
+		// 機雷の中心座標を計算（144 / 2 = 72）
+		float centerX = mine->pos.x + (SEA_MINE_WIDTH * 0.5f);
+		float centerY = mine->pos.y + (SEA_MINE_HEIGHT * 0.5f);
+
+		// 爆発エフェクト（96x96）の半分（48）を引いて、中心をぴったり合わせる
+		float effectX = centerX - (EFFECT_ANIM_PARAM[EFFECT_BOMB].width * 0.5f);
+		float effectY = centerY - (EFFECT_ANIM_PARAM[EFFECT_BOMB].height * 0.5f);
+
+		StartEffectAnimation(EFFECT_BOMB, effectX, effectY);
 	}
 }
 
