@@ -32,7 +32,7 @@ struct EffectAnimationParam
 };
 const EffectAnimationParam EFFECT_ANIM_PARAM[EFFECT_MAX] =
 {
-	25,8,96,96  // BOMB
+	8,7,192,192  // BOMB
 };
 
 void InitEffectAnimation();
@@ -43,7 +43,7 @@ void DrawEffectAnimation();
 void FinEffectAnimation();
 
 // エフェクト開始
-EffectData* StartEffectAnimation(EffectType type, float posX,float posY,int interval = -1,bool isLoop = false);
+EffectData* StartEffectAnimation(EffectType type, float posX,float posY,bool isLoop = false);
 
 // エフェクト取得
 EffectData* GetEffectAnimation();

@@ -100,7 +100,7 @@ void FinEffectAnimation()
 	}
 }
 
-EffectData* StartEffectAnimation(EffectType type, float posX, float posY, int interval, bool loop)
+EffectData* StartEffectAnimation(EffectType type, float posX, float posY, bool loop)
 {
 	// マスターパラム取得
 	EffectAnimationParam param = EFFECT_ANIM_PARAM[type];
@@ -119,7 +119,7 @@ EffectData* StartEffectAnimation(EffectType type, float posX, float posY, int in
 			effect->pos.y = posY;
 
 			// インターバル設定
-			effect->interval = interval;
+			effect->interval = param.interval;
 
 			// タイマー設定
 			effect->timer = effect->interval;
