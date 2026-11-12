@@ -3,7 +3,7 @@
 
 #define SEA_MINE_WIDTH  (144.0f)
 #define SEA_MINE_HEIGHT (144.0f)
-#define SEA_MINE_RADIUS (70)
+#define SEA_MINE_RADIUS (65)
 
 void InitSeaMine();
 void LoadSeaMine();

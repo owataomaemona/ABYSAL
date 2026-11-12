@@ -34,7 +34,7 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 #define PLAYER_DASH_TIME (14)
 
 // ジャンプ力
-#define PLAYER_JUMP_POWER (4.5f)
+#define PLAYER_JUMP_POWER (4.0f)
 // 重力
 #define PLAYER_GRAVITY (0.1f)
 
