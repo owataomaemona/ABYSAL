@@ -3,6 +3,7 @@
 #include "../Input/Input.h"
 #include "../Collision/Collision.h"
 #include "../Camera/Camera.h"
+#include "../Animation/Effect.h"
 #include "../Map/MapChip.h"
 #include "../Map/MapManager.h"
 
@@ -50,14 +51,21 @@ void InitPlayer()
 	g_PlayerData.pos = VGet(0.0f, 0.0f, 0.0f);
 	g_PlayerData.move = VGet(0.0f, 0.0f, 0.0f);
 	g_PlayerData.beforePos = VGet(0.0f, 0.0f, 0.0f);
+
 	g_PlayerData.width = 0.0f;
 	g_PlayerData.height = 0.0f;
+	g_PlayerData.grazeWidth = 0.0f;
+	g_PlayerData.grazeHeight = 0.0f;
+
 	g_PlayerData.isDash = false;
 	g_PlayerData.dashMove = false;
 	g_PlayerData.dashTimer = 0.0f;
+
 	g_PlayerData.active = false;
 	g_PlayerData.isDead = false;
+
 	g_PlayerData.isAir = false;
+
 	g_PlayerData.playAnim = PLAYER_ANIM_NONE;
 
 	for (int i = 0; i < PLAYER_ANIM_MAX; i++)
@@ -92,6 +100,10 @@ void StartPlayer()
 	g_PlayerData.width = PLAYER_WIDTH;
 	g_PlayerData.height = PLAYER_HEIGHT;
 
+	// ギリギリ回避判定サイズ設定
+	g_PlayerData.grazeWidth = PLAYER_GRAZE_WIDTH;
+	g_PlayerData.grazeHeight = PLAYER_GRAZE_HEIGHT;
+	
 	// 待機アニメーションから開始する
 	StartPlayerAnimation(PLAYER_ANIM_IDLE);
 }
@@ -334,4 +346,9 @@ void PlayerDead()
 void PlayerHitSeaMine() 
 {
 	PlayerDead();
+}
+
+void GrazePlayerHitSeaMine()
+{
+	StartEffectAnimation(EFFECT_NICE, g_PlayerData.pos.x, g_PlayerData.pos.y);
 }

@@ -127,6 +127,8 @@ void CheckCollision()
 
 	// プレイヤーと機雷の当たり判定
 	CheckSeaMinePlayer();
+	// プレイヤーと機雷のギリギリ回避判定
+	CheckSeaMineGrazePlayer();
 
 	// プレイヤーと透明ブロックの当たり判定
 	CheckInvisiblePlayer();

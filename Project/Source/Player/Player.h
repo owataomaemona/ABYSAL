@@ -6,6 +6,11 @@
 #define PLAYER_HEIGHT	(92.0f)
 #define PLAYER_RADIUS	(38.0f)
 
+// プレイヤーギリギリ回避判定
+#define PLAYER_GRAZE_WIDTH (80.0f)
+#define PLAYER_GRAZE_HEIGHT (96.0f)
+#define PLAYER_GRAZE_RADIUS	(42.0f)
+
 // アニメーションタイプ
 enum PlayerAnimationType
 {
@@ -33,6 +38,8 @@ struct PlayerData
 	VECTOR move;                                // 移動量
 	float width;                                // 横幅格納用
 	float height;                               // 縦幅格納用
+	float grazeWidth;                           // ギリギリ回避判定横幅格納用
+	float grazeHeight;                          // ギリギリ回避判定縦幅格納用
 	AnimationData animation[PLAYER_ANIM_MAX];	// アニメーション
 	PlayerAnimationType playAnim;				// 再生中のアニメーション
 };
@@ -50,5 +57,7 @@ void FinPlayer();
 PlayerData* GetPlayer();
 PlayerData CopyPlayer();
 
-// 当たり判定(マップは別である)
+// 機雷と当たった時
 void PlayerHitSeaMine();
+// 機雷ギリギリ回避
+void GrazePlayerHitSeaMine();

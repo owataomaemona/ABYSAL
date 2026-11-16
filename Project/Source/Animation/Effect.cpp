@@ -28,6 +28,7 @@ void InitEffectAnimation()
 void LoadEffectAnimation()
 {
 	g_EffectHandle[EFFECT_BOMB] = LoadGraph("Data/Effect/Bomb.png");
+	g_EffectHandle[EFFECT_NICE] = LoadGraph("Data/Effect/NICE!.png");
 }
 
 void StepEffectAnimation()
