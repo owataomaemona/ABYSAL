@@ -13,7 +13,7 @@ enum PlayerAnimationType
 	PLAYER_ANIM_WALK,
 	PLAYER_ANIM_SWIM,
 	PLAYER_ANIM_DASH,
-	PLAYER_ANIM_FLASH,
+	PLAYER_ANIM_DEAD,
 	PLAYER_ANIM_MAX,
 	PLAYER_ANIM_NONE = -1
 };
@@ -22,6 +22,7 @@ enum PlayerAnimationType
 struct PlayerData
 {
 	bool active;								// 生存フラグ
+	bool isDead;                                // 死亡したか
 	bool isTurn;								// 左を向いているか
 	bool isAir;									// 空中にいるか
 	bool isDash;                                // ダッシュ中

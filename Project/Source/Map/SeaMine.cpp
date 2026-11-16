@@ -88,12 +88,12 @@ void SeaMineDead(SeaMineData* mine)
 		mine->active = false;
 
 		// 機雷の中心座標を計算
-		float centerX = mine->pos.x + (SEA_MINE_WIDTH * 0.5f);
-		float centerY = mine->pos.y + (SEA_MINE_HEIGHT * 0.5f);
+		float centerX = mine->pos.x + SEA_MINE_WIDTH / 2;
+		float centerY = mine->pos.y + SEA_MINE_HEIGHT / 2;
 
 		// 爆発エフェクトの半分を引いて中心を合わせる
-		float effectX = centerX - (EFFECT_ANIM_PARAM[EFFECT_BOMB].width * 0.5f);
-		float effectY = centerY - (EFFECT_ANIM_PARAM[EFFECT_BOMB].height * 0.5f);
+		float effectX = centerX - EFFECT_ANIM_PARAM[EFFECT_BOMB].width / 2;
+		float effectY = centerY - EFFECT_ANIM_PARAM[EFFECT_BOMB].height / 2;
 
 		StartEffectAnimation(EFFECT_BOMB, effectX, effectY);
 	}

@@ -21,7 +21,7 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 	25,4,80,92,true,   // WALK
 	25,4,88,88,true,   // SWIM
 	3,5,92,92,false,   // DASH
-	6,6,64,64,false,   // FLASH
+	10,9,84,240,false, // DEAD
 };
 
 // プレイヤー設定関連
@@ -56,6 +56,7 @@ void InitPlayer()
 	g_PlayerData.dashMove = false;
 	g_PlayerData.dashTimer = 0.0f;
 	g_PlayerData.active = false;
+	g_PlayerData.isDead = false;
 	g_PlayerData.isAir = false;
 	g_PlayerData.playAnim = PLAYER_ANIM_NONE;
 
@@ -72,13 +73,16 @@ void LoadPlayer()
 	g_PlayerData.animation[PLAYER_ANIM_WALK].handle = LoadGraph("Data/Player/DiverWalk.png");
 	g_PlayerData.animation[PLAYER_ANIM_SWIM].handle = LoadGraph("Data/Player/DiverSwim.png");
 	g_PlayerData.animation[PLAYER_ANIM_DASH].handle = LoadGraph("Data/Player/DiverDash.png");
-	g_PlayerData.animation[PLAYER_ANIM_FLASH].handle = LoadGraph("Data/Player/DiverFlash.png");
+	g_PlayerData.animation[PLAYER_ANIM_DEAD].handle = LoadGraph("Data/Player/DiverDead.png");
 }
 
 void StartPlayer() 
 {
 	// 生存フラグを立てる
 	g_PlayerData.active = true;
+
+	// 死亡フラグも立てる(死亡アニメーションを組み込むため)
+	g_PlayerData.isDead = false;
 
 	// 初期位置設定
 	g_PlayerData.pos.x = PLAYER_DEFAULT_POS_X;
@@ -95,7 +99,7 @@ void StartPlayer()
 void StepPlayer() 
 {
 	// 死んでいたら何もしない
-	if (!g_PlayerData.active)
+	if (!g_PlayerData.active || g_PlayerData.isDead)
 	{
 		return;
 	}
@@ -152,6 +156,12 @@ void UpdatePlayer()
 {
 	// 死んでいたら処理しない
 	if (!g_PlayerData.active) return;
+
+	if (g_PlayerData.isDead) 
+	{
+		UpdatePlayerAnimation();
+		return;
+	}
 
 	// 上昇しているもしくは落ちている場合は空中フラグを立てる
 	if (g_PlayerData.move.y < 0.0f || g_PlayerData.move.y > PLAYER_GRAVITY)
@@ -260,6 +270,14 @@ void UpdatePlayerAnimation()
 
 		return;
 	}
+	// 死亡しているか
+	if (!g_PlayerData.active || g_PlayerData.isDead)
+	{
+		AnimationData* animData = &g_PlayerData.animation[PLAYER_ANIM_DEAD]; // 死亡アニメーション
+		UpdateAnimation(animData); // アニメーションを進める処理
+
+		return;
+	}
 	// 地上にいるか
 	if (!g_PlayerData.isAir)
 	{
@@ -298,8 +316,13 @@ void UpdatePlayerAnimation()
 
 void PlayerDead() 
 {
-	// 本当はやりたいことがあるけど一応死亡する
-	g_PlayerData.active = false;
+	// プレイヤーがアクティブかつ死んでない場合
+	if (g_PlayerData.active && !g_PlayerData.isDead)
+	{
+		g_PlayerData.isDead = true;
+
+		StartPlayerAnimation(PLAYER_ANIM_DEAD);
+	}
 }
 
 void PlayerHitSeaMine() 
