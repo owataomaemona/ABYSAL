@@ -63,6 +63,7 @@ SeaMineData* CreateSeaMine(MapChipType type, VECTOR pos)
 		{
 			// 機雷生成
 			mine->active = true;
+			mine->isSeaMineGraze = false;
 			mine->handle = g_SeaMineHandle[type];
 			mine->pos = pos;
 			mine->type = type;

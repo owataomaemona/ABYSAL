@@ -176,8 +176,11 @@ void CheckSeaMineGrazePlayer()
 
 	if (player->active)
 	{
-		float playerCenterX = player->pos.x + PLAYER_GRAZE_WIDTH / 2;
-		float playerCenterY = player->pos.y + PLAYER_GRAZE_HEIGHT / 2;
+		float playerGrazeCenterX = player->pos.x + PLAYER_GRAZE_WIDTH / 2;
+		float playerGrazeCenterY = player->pos.y + PLAYER_GRAZE_HEIGHT / 2;
+
+		float playerCenterX = player->pos.x + PLAYER_WIDTH / 2;
+		float playerCenterY = player->pos.y + PLAYER_HEIGHT / 2;
 
 		for (int y = 0; y < MAP_CHIP_Y_NUM; y++)
 		{
@@ -198,7 +201,12 @@ void CheckSeaMineGrazePlayer()
 				if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_GRAZE_RADIUS,
 					seaMineCenterX, seaMineCenterY, SEA_MINE_RADIUS))
 				{
-					GrazePlayerHitSeaMine();
+					if (!mapChipData.seaMine->isSeaMineGraze)
+					{
+						mapChipData.seaMine->isSeaMineGraze = true;
+
+						GrazePlayerHitSeaMine();
+					}
 				}
 			}
 		}

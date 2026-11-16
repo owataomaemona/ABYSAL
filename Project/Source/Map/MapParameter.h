@@ -34,6 +34,7 @@ struct BlockData
 struct SeaMineData
 {
 	bool active;
+	bool isSeaMineGraze; // ギリギリ回避に当たったか
 	int handle;
 	MapChipType type;
 	VECTOR pos;
