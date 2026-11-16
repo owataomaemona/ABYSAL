@@ -157,6 +157,7 @@ void UpdatePlayer()
 	// 死んでいたら処理しない
 	if (!g_PlayerData.active) return;
 
+	// これがないと死亡した後でも動き続ける
 	if (g_PlayerData.isDead) 
 	{
 		UpdatePlayerAnimation();
@@ -320,6 +321,11 @@ void PlayerDead()
 	if (g_PlayerData.active && !g_PlayerData.isDead)
 	{
 		g_PlayerData.isDead = true;
+
+		// ↓ダッシュ中に死亡してもアニメーションを固まらせないために追加
+		g_PlayerData.isDash = false;
+		g_PlayerData.dashMove = false;
+		g_PlayerData.dashTimer = 0.0f;
 
 		StartPlayerAnimation(PLAYER_ANIM_DEAD);
 	}
