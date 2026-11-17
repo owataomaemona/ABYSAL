@@ -19,3 +19,4 @@ void FinInput();
 
 bool IsInputKey(InputKey key);		// キー入力判定
 bool IsTriggerKey(InputKey key);	// キー押した瞬間判定
+bool IsReleaseKey(InputKey key);    // キー離した瞬間判定

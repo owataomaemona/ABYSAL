@@ -159,24 +159,31 @@ void CheckSeaMinePlayer()
 				float seaMineCenterX = mapChipData.seaMine->pos.x + SEA_MINE_WIDTH / 2;
 				float seaMineCenterY = mapChipData.seaMine->pos.y + SEA_MINE_HEIGHT / 2;
 
-				// 円で当たり判定を取る
+				// 円で当たり判定を取る(機雷本体との当たり判定)
 				if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_RADIUS,
 					seaMineCenterX, seaMineCenterY, SEA_MINE_RADIUS))
 				{
+					mapChipData.seaMine->isNowGraze = false;
+
 					PlayerHitSeaMine();
 					SeaMineHitPlayer(mapChipData.seaMine);
 
 					continue;
 				}
-
-				// 円で当たり判定を取る(ギリギリ判定)
-				if (!mapChipData.seaMine->isSeaMineGraze)
+				// ギリギリ判定(離脱判定)
+				if (!mapChipData.seaMine->isSeaMineGraze) // まだギリギリ判定してないか
 				{
 					if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_GRAZE_RADIUS,
 						seaMineCenterX, seaMineCenterY, SEA_MINE_RADIUS))
 					{
+						// この当たり判定内にいるときにisNowGrazeがtrueになる
+						mapChipData.seaMine->isNowGraze = true;
+					}
+					// isNowGrazeから離れたとき
+					else if(mapChipData.seaMine->isNowGraze)
+					{
+						mapChipData.seaMine->isNowGraze = false;
 						mapChipData.seaMine->isSeaMineGraze = true;
-
 						GrazePlayerHitSeaMine(player);
 					}
 				}

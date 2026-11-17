@@ -60,7 +60,12 @@ bool IsInputKey(InputKey key)
 	return g_InputState & key;
 }
 
-bool IsTriggerKey(InputKey key)
+bool IsTriggerKey(InputKey key) // 押した瞬間
 {
 	return (g_InputState & key) && !(g_PrevInputState & key);
+}
+
+bool IsReleaseKey(InputKey key) // 離した瞬間
+{
+	return (g_PrevInputState & key) && !(g_InputState & key);
 }

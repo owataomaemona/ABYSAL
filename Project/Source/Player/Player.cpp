@@ -36,6 +36,10 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 
 // ジャンプ力
 #define PLAYER_JUMP_POWER (4.0f)
+
+// 長押ししたときのジャンプ力
+#define PLAYER_BIG_JUMP_POWER (6.0f)
+
 // 重力
 #define PLAYER_GRAVITY (0.1f)
 
@@ -146,6 +150,8 @@ void StepPlayer()
 		g_PlayerData.dashTimer = PLAYER_DASH_TIME;
 
 		StartPlayerAnimation(PLAYER_ANIM_DASH);
+
+		PlayerFrash();
 
 		if (IsInputKey(KEY_LEFT) || IsInputKey(KEY_RIGHT)) 
 		{
@@ -353,4 +359,17 @@ void GrazePlayerHitSeaMine(PlayerData* player)
 	float effectY = centerY - EFFECT_ANIM_PARAM[EFFECT_NICE].height;
 
 	StartEffectAnimation(EFFECT_NICE, effectX, effectY);
+}
+
+void PlayerFrash()
+{
+	// プレイヤーの中心座標を計算
+	float centerX = g_PlayerData.pos.x + PLAYER_WIDTH / 2;
+	float centerY = g_PlayerData.pos.y + PLAYER_HEIGHT / 2;
+
+	// フラッシュエフェクトの半分を引いて中心を合わせる
+	float effectX = centerX - EFFECT_ANIM_PARAM[EFFECT_FLASH].width / 2;
+	float effectY = centerY - EFFECT_ANIM_PARAM[EFFECT_FLASH].height / 2;
+
+	StartEffectAnimation(EFFECT_FLASH, effectX, effectY);
 }

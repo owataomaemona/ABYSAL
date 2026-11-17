@@ -57,3 +57,5 @@ PlayerData CopyPlayer();
 void PlayerHitSeaMine();
 // 機雷ギリギリ回避
 void GrazePlayerHitSeaMine(PlayerData* player);
+// フラッシュアニメーション用
+void PlayerFrash();
