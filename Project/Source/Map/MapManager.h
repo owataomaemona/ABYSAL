@@ -11,6 +11,5 @@ void FinMap();
 void CheckMapPlayer();
 
 void CheckSeaMinePlayer();
-void CheckSeaMineGrazePlayer();
 
 void CheckInvisiblePlayer();

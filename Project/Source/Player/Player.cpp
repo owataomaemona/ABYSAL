@@ -54,9 +54,7 @@ void InitPlayer()
 
 	g_PlayerData.width = 0.0f;
 	g_PlayerData.height = 0.0f;
-	g_PlayerData.grazeWidth = 0.0f;
-	g_PlayerData.grazeHeight = 0.0f;
-
+	
 	g_PlayerData.isDash = false;
 	g_PlayerData.dashMove = false;
 	g_PlayerData.dashTimer = 0.0f;
@@ -99,10 +97,6 @@ void StartPlayer()
 	//　サイズ設定
 	g_PlayerData.width = PLAYER_WIDTH;
 	g_PlayerData.height = PLAYER_HEIGHT;
-
-	// ギリギリ回避判定サイズ設定
-	g_PlayerData.grazeWidth = PLAYER_GRAZE_WIDTH;
-	g_PlayerData.grazeHeight = PLAYER_GRAZE_HEIGHT;
 	
 	// 待機アニメーションから開始する
 	StartPlayerAnimation(PLAYER_ANIM_IDLE);
@@ -348,7 +342,15 @@ void PlayerHitSeaMine()
 	PlayerDead();
 }
 
-void GrazePlayerHitSeaMine()
+void GrazePlayerHitSeaMine(PlayerData* player)
 {
-	StartEffectAnimation(EFFECT_NICE, g_PlayerData.pos.x, g_PlayerData.pos.y);
+	// プレイヤーの中心座標を計算
+	float centerX = player->pos.x + PLAYER_WIDTH / 2;
+	float centerY = player->pos.y + PLAYER_HEIGHT / 2;
+
+	// プレイヤーの左斜め上に出るようにする
+	float effectX = centerX - EFFECT_ANIM_PARAM[EFFECT_NICE].width;
+	float effectY = centerY - EFFECT_ANIM_PARAM[EFFECT_NICE].height;
+
+	StartEffectAnimation(EFFECT_NICE, effectX, effectY);
 }

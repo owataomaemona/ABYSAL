@@ -34,7 +34,7 @@ struct EffectAnimationParam
 const EffectAnimationParam EFFECT_ANIM_PARAM[EFFECT_MAX] =
 {
 	8,7,192,192,  // BOMB
-	8,12,66,94,   // NICE
+	8,12,99,141,   // NICE
 };
 
 void InitEffectAnimation();
