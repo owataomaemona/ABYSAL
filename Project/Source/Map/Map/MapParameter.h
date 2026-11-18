@@ -10,14 +10,15 @@
 enum MapChipType
 {
 	MAP_CHIP_NONE,
-	NORMAL_BLOCK,   // ここから
-	NORMAL_BLOCK_2, // 
-	NORMAL_BLOCK_3, //
-	NORMAL_BLOCK_4, //
-	NORMAL_BLOCK_5, //
-	NORMAL_BLOCK_6, // ここまでブロック
-	SEA_MINE_BLOCK, // 機雷
-	INVISIBLE_BLOCK,// 透明ブロック(天井や床用)
+	NORMAL_BLOCK,     // ここから
+	NORMAL_BLOCK_2,   // 
+	NORMAL_BLOCK_3,   //
+	NORMAL_BLOCK_4,   //
+	NORMAL_BLOCK_5,   //
+	NORMAL_BLOCK_6,   // ここまでブロック
+	SEA_MINE_BLOCK,   // 機雷
+	INVISIBLE_BLOCK,  // 透明ブロック(天井や床用)
+	SIGN_BOARD_BLOCK, // 看板ブロック(アニメーション)
 	BLOCK_TYPE_MAX,
 };
 
@@ -60,4 +61,19 @@ struct MapChipData
 	BlockData* block;
 	SeaMineData* seaMine;
 	InvisibleData* invisible;
+};
+
+struct MapChipAnimation
+{
+	bool active;
+	bool isLoop;
+	int handle;
+	MapChipType type;
+	VECTOR pos;
+	float width;
+	float height;
+	int nowFrame;
+	int frameNum;
+	int frameWidth;
+	int frameHeight;
 };

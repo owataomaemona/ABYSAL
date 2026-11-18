@@ -93,6 +93,9 @@
     <ClCompile Include="Source\Map\Map\MapManager.cpp">
       <Filter>Source\Map\Map</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Map\Map\SignBoard.cpp">
+      <Filter>Source\Map\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameSetting\GameSetting.h">
@@ -144,6 +147,9 @@
       <Filter>Source\Map\Map</Filter>
     </ClInclude>
     <ClInclude Include="Source\Map\Map\MapParameter.h">
+      <Filter>Source\Map\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Map\Map\SignBoard.h">
       <Filter>Source\Map\Map</Filter>
     </ClInclude>
   </ItemGroup>
