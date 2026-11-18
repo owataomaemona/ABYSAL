@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include "MapParameter.h"
-#include "../Player/Player.h"
+#include "../../Player/Player.h"
 
 void InitMap();
 void LoadMap();

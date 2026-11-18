@@ -1,6 +1,6 @@
 ﻿#include "DxLib.h"
 #include "Invisible.h"
-#include "../Camera/Camera.h"
+#include "../../Camera/Camera.h"
 
 InvisibleData g_InvisibleBlocks[BLOCK_MAX] = { 0 };
 int g_InvisibleBlockHandle[BLOCK_TYPE_MAX] = { 0 };

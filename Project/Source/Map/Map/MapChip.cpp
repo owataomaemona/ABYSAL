@@ -1,9 +1,9 @@
 ﻿#include "MapChip.h"
 #include "DxLib.h"
-#include "../GameSetting/GameSetting.h"
+#include "../../GameSetting/GameSetting.h"
 #include "MapParameter.h"
 #include "Block.h"
-#include "SeaMine.h"
+#include "../SeaMine/SeaMine.h"
 #include "Invisible.h"
 
 MapChipData g_MapChip[MAP_CHIP_Y_NUM][MAP_CHIP_X_NUM] = { 0 };

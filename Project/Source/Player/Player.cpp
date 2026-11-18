@@ -4,8 +4,8 @@
 #include "../Collision/Collision.h"
 #include "../Camera/Camera.h"
 #include "../Animation/Effect.h"
-#include "../Map/MapChip.h"
-#include "../Map/MapManager.h"
+#include "../Map/Map/MapChip.h"
+#include "../Map/Map/MapManager.h"
 
 // アニメーション用パラメーター
 struct PlayerAnimationParam

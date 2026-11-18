@@ -1,8 +1,8 @@
 ﻿#include "DxLib.h"
 #include "Collision.h"
 #include "../Player/Player.h"
-#include "../Map/Block.h"
-#include "../Map//MapManager.h"
+#include "../Map/Map/Block.h"
+#include "../Map/Map/MapManager.h"
 #include <math.h>
 
 // 矩形と点の当たり判定

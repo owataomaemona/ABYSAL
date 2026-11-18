@@ -1,7 +1,7 @@
 ﻿#include "DxLib.h"
-#include "../Camera/Camera.h"
-#include "../Map/SeaMine.h"
-#include "../Animation/Effect.h"
+#include "../../Camera/Camera.h"
+#include "../SeaMine/SeaMine.h"
+#include "../../Animation/Effect.h"
 
 SeaMineData g_SeaMines[BLOCK_MAX] = { 0 };
 int g_SeaMineHandle[BLOCK_TYPE_MAX] = { 0 };

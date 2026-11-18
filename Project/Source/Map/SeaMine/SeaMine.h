@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "MapParameter.h"
+#include "../Map/MapParameter.h"
 
 #define SEA_MINE_WIDTH  (144.0f)
 #define SEA_MINE_HEIGHT (144.0f)

@@ -1,7 +1,7 @@
 ﻿#include "DxLib.h"
 #include "../../BackGround/BackGround.h"
 //#include "../../Scene/SceneManager.h"
-#include "../../Map/MapManager.h"
+#include "../../Map/Map/MapManager.h"
 #include "../../Player/Player.h"
 #include "../../Collision/Collision.h"
 #include "../../Camera/Camera.h"

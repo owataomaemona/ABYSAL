@@ -1,11 +1,11 @@
 ﻿#include "MapManager.h"
 #include "MapParameter.h"
 #include "MapChip.h"
-#include "../Collision/Collision.h"
+#include "../../Collision/Collision.h"
 #include "Block.h"
-#include "SeaMine.h"
+#include "../SeaMine/SeaMine.h"
 #include "Invisible.h"
-#include "../Player/Player.h"
+#include "../../Player/Player.h"
 
 // キャラクターの周囲何マスまでチェックするか
 #define CHECK_ROUND_NUM (2)
