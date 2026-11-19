@@ -5,7 +5,6 @@
 #define EFFECT_ANIMATION_MAX 255
 
 EffectData g_EffectData[EFFECT_ANIMATION_MAX] = { 0 };
-
 int g_EffectHandle[EFFECT_MAX] = { 0 };
 
 void InitEffectAnimation() 

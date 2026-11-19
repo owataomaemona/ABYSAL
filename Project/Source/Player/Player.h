@@ -51,7 +51,6 @@ void FinPlayer();
 
 // 取得関数
 PlayerData* GetPlayer();
-PlayerData CopyPlayer();
 
 // 機雷と当たった時
 void PlayerHitSeaMine();

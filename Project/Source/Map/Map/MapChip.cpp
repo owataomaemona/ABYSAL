@@ -5,6 +5,7 @@
 #include "Block.h"
 #include "../SeaMine/SeaMine.h"
 #include "Invisible.h"
+#include "SignBoard.h"
 
 MapChipData g_MapChip[MAP_CHIP_Y_NUM][MAP_CHIP_X_NUM] = { 0 };
 
@@ -49,6 +50,9 @@ void CreateMap()
 
 			// 生成した透明ブロックはMapChipDataで参照しておく
 			g_MapChip[i][j].invisible = CreateInvisible(type, pos);
+
+			// 生成した看板はMapChipで参照しておく
+			g_MapChip[i][j].signBoard = CreateSignBoard(type, pos);
 		}
 	}
 }

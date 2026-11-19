@@ -5,6 +5,7 @@
 #include "Block.h"
 #include "../SeaMine/SeaMine.h"
 #include "Invisible.h"
+#include "SignBoard.h"
 #include "../../Player/Player.h"
 
 // キャラクターの周囲何マスまでチェックするか
@@ -15,6 +16,12 @@
 
 void InitMap()
 {
+	// 機雷の初期化
+	InitSeaMine();
+
+	// 看板の初期化
+	InitSignBoard();
+
 }
 
 void LoadMap()
@@ -29,11 +36,20 @@ void LoadMap()
 
 	// 透明ブロックのロード
 	LoadInvisible();
+
+	// 看板のロード
+	LoadSignBoard();
 }
 
 void StartMap()
 {
 	CreateMap();
+}
+
+void StepMap() 
+{
+	// 看板のアニメーション更新
+	StepSignBoard();
 }
 
 void DrawMap()
@@ -46,12 +62,18 @@ void DrawMap()
 
 	// 透明ブロック描画
 	DrawInvisible();
+
+	// 看板描画
+	DrawSignBoard();
 }
 
 void FinMap()
 {
 	// 機雷終了
 	FinSeaMine();
+
+	// 看板終了
+	FinSignBoard();
 }
 
 void CheckMapPlayer() 
@@ -71,6 +93,7 @@ void CheckMapPlayer()
 				// マップチップが以下と0の場合は何もない
 				if (mapChipData.mapChip == SEA_MINE_BLOCK ||
 					mapChipData.mapChip == INVISIBLE_BLOCK ||
+					mapChipData.mapChip == SIGN_BOARD_BLOCK ||
 					mapChipData.mapChip == 0) continue;
 
 				if (CheckSquareSquare(player->pos.x, player->beforePos.y, player->width, player->height,
@@ -105,6 +128,7 @@ void CheckMapPlayer()
 				// マップチップが以下と0の場合は何もない
 				if (mapChipData.mapChip == SEA_MINE_BLOCK ||
 					mapChipData.mapChip == INVISIBLE_BLOCK ||
+					mapChipData.mapChip == SIGN_BOARD_BLOCK ||
 					mapChipData.mapChip == 0) continue;
 
 				// 矩形と矩形で当たり判定を取る

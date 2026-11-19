@@ -1,25 +1,32 @@
 ﻿#pragma once
 #include "../Map/MapParameter.h"
 
-void InitSignBoard();
-void LoadSignBoard();
-void StartSignBoard();
-void StepSignBoard();
-void DrawSignBoard();
-void FinSignBoard();
+// 看板サイズ
+#define SIGN_BOARD_WIDTH  (100.0f)
+#define SIGN_BOARD_HEIGHT (100.0f)
 
-// アニメーション用パラメーター
-struct MapChipAnimationParam
+// 離脱判定用のバカでか半径
+#define SIGN_BOARD_RADIUS (100.0f)
+
+// エフェクト用パラメーター
+struct MapAnimationParam
 {
 	int interval;
 	int frameNum;
 	int width;
 	int height;
+	bool isLoop;
 };
-const MapChipAnimationParam MAP_CHIP_ANIM_PARAM[SIGN_BOARD_BLOCK] =
+const MapAnimationParam SIGN_BOARD_ANIM_PARAM =
 {
-	25,9,98,92 // SIGN
+	10,9,100,100,true,
 };
 
-MapChipAnimation* CreateSignBoard(MapChipType type, VECTOR pos);
-MapChipAnimation* GetSignBoard();
+void InitSignBoard();
+void LoadSignBoard();
+void StepSignBoard();
+void DrawSignBoard();
+void FinSignBoard();
+
+SignBoardData* CreateSignBoard(MapChipType type, VECTOR pos);
+SignBoardData* GetSignBoard();

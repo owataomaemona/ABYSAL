@@ -63,6 +63,9 @@ void StepPlayScene()
 
 	// カメラステップ
 	StepCamera();
+
+	// マップステップ
+	StepMap();
 }
 
 void UpdatePlayScene()

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "DxLib.h"
+#include "../../Animation/Animation.h"
 
 #define BLOCK_MAX 1024
 #define MAP_CHIP_X_NUM (154)
@@ -21,6 +22,7 @@ enum MapChipType
 	SIGN_BOARD_BLOCK, // 看板ブロック(アニメーション)
 	BLOCK_TYPE_MAX,
 };
+/*------------------------------------------------------------*/
 
 struct BlockData 
 {
@@ -55,25 +57,25 @@ struct InvisibleData
 	float height;
 };
 
+struct SignBoardData
+{
+	bool active;
+	int handle;
+	bool isLoop;
+	MapChipType type;
+	VECTOR pos;
+	float width;
+	float height;
+	AnimationData animation;// アニメーション
+};
+
+/*------------------------------------------------------------*/
+
 struct MapChipData
 {
 	int mapChip;
 	BlockData* block;
 	SeaMineData* seaMine;
 	InvisibleData* invisible;
-};
-
-struct MapChipAnimation
-{
-	bool active;
-	bool isLoop;
-	int handle;
-	MapChipType type;
-	VECTOR pos;
-	float width;
-	float height;
-	int nowFrame;
-	int frameNum;
-	int frameWidth;
-	int frameHeight;
+	SignBoardData* signBoard;
 };

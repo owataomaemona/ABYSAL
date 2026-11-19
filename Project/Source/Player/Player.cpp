@@ -252,11 +252,6 @@ PlayerData* GetPlayer()
 	return &g_PlayerData;
 }
 
-PlayerData CopyPlayer()
-{
-	return g_PlayerData;
-}
-
 void StartPlayerAnimation(PlayerAnimationType anim)
 {
 	// 再生中のアニメーションであれば何もしない

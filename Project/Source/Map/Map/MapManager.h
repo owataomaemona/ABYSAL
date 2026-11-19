@@ -5,6 +5,7 @@
 void InitMap();
 void LoadMap();
 void StartMap();
+void StepMap();
 void DrawMap();
 void FinMap();
 

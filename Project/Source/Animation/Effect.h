@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "../Animation/Animation.h"
 
 enum EffectType
 {
