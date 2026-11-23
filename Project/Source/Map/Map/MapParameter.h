@@ -60,8 +60,8 @@ struct InvisibleData
 struct SignBoardData
 {
 	bool active;
+	bool isRead;
 	int handle;
-	bool isLoop;
 	MapChipType type;
 	VECTOR pos;
 	float width;

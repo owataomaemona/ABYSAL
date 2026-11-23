@@ -235,7 +235,7 @@ void CheckSignBoardPlayer()
 				if (mapChipData.mapChip != SIGN_BOARD_BLOCK) continue;
 
 				// 機雷のポインタが空でないか確認
-				if (mapChipData.seaMine == nullptr) continue;
+				if (mapChipData.signBoard == nullptr) continue;
 
 				float signBoardCenterX = mapChipData.signBoard->pos.x + SIGN_BOARD_WIDTH / 2;
 				float signBoardCenterY = mapChipData.signBoard->pos.y + SIGN_BOARD_HEIGHT / 2;
@@ -244,7 +244,12 @@ void CheckSignBoardPlayer()
 				if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_RADIUS,
 					signBoardCenterX, signBoardCenterY, SIGN_BOARD_RADIUS))
 				{
-					SignBoardAreaPlayer(mapChipData.signBoard);
+					if (!mapChipData.signBoard->isRead)
+					{
+						mapChipData.signBoard->isRead = true;
+
+						SignBoardAreaPlayer(mapChipData.signBoard);
+					}
 
 					continue;
 				}

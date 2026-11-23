@@ -73,6 +73,7 @@ SignBoardData* CreateSignBoard(MapChipType type, VECTOR pos)
 			signBoard->handle = g_SignBoardHandle[type];
 			signBoard->pos = pos;
 			signBoard->type = type;
+			signBoard->isRead = false;
 			signBoard->width = SIGN_BOARD_WIDTH;
 			signBoard->height = SIGN_BOARD_HEIGHT;
 			
