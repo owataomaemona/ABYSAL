@@ -216,6 +216,43 @@ void CheckSeaMinePlayer()
 	}
 }
 
+void CheckSignBoardPlayer()
+{
+	PlayerData* player = GetPlayer();
+
+	if (player->active || player != nullptr)
+	{
+		float playerCenterX = player->pos.x + PLAYER_WIDTH / 2;
+		float playerCenterY = player->pos.y + PLAYER_HEIGHT / 2;
+
+		for (int y = 0; y < MAP_CHIP_Y_NUM; y++)
+		{
+			for (int x = 0; x < MAP_CHIP_X_NUM; x++)
+			{
+				// マップチップ取得
+				MapChipData mapChipData = GetMapChipData(x, y);
+				// マップチップがSIGN_BOARD_BLOCK以外の場合は何もしない
+				if (mapChipData.mapChip != SIGN_BOARD_BLOCK) continue;
+
+				// 機雷のポインタが空でないか確認
+				if (mapChipData.seaMine == nullptr) continue;
+
+				float signBoardCenterX = mapChipData.signBoard->pos.x + SIGN_BOARD_WIDTH / 2;
+				float signBoardCenterY = mapChipData.signBoard->pos.y + SIGN_BOARD_HEIGHT / 2;
+
+				// 円で当たり判定を取る(機雷本体との当たり判定)
+				if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_RADIUS,
+					signBoardCenterX, signBoardCenterY, SIGN_BOARD_RADIUS))
+				{
+					SignBoardAreaPlayer(mapChipData.signBoard);
+
+					continue;
+				}
+			}
+		}
+	}
+}
+
 void CheckInvisiblePlayer()
 {
 	PlayerData* player = GetPlayer();

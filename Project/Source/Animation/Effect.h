@@ -5,6 +5,7 @@ enum EffectType
 	EFFECT_BOMB,
 	EFFECT_NICE,
 	EFFECT_FLASH,
+	EFFECT_TEACH_Z,
 	EFFECT_MAX,
 	EFFECT_NONE = -1
 };
@@ -36,6 +37,7 @@ const EffectAnimationParam EFFECT_ANIM_PARAM[EFFECT_MAX] =
 	8,7,192,192,  // BOMB
 	6,12,99,141,  // NICE
 	6,6,128,128,  // FRASH
+	10,35,150,78, // TEACH_Z
 };
 
 void InitEffectAnimation();

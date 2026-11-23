@@ -30,3 +30,6 @@ void FinSignBoard();
 
 SignBoardData* CreateSignBoard(MapChipType type, VECTOR pos);
 SignBoardData* GetSignBoard();
+
+// クソでか当たり判定
+void SignBoardAreaPlayer(SignBoardData* signBoard);

@@ -1,6 +1,7 @@
 ﻿#include "DxLib.h"
 #include "SignBoard.h"
 #include "../../Camera/Camera.h"
+#include "../../Animation/Effect.h"
 
 SignBoardData g_SignBoards[BLOCK_MAX] = { 0 };
 int g_SignBoardHandle[BLOCK_TYPE_MAX] = { 0 };
@@ -92,4 +93,12 @@ SignBoardData* CreateSignBoard(MapChipType type, VECTOR pos)
 SignBoardData* GetSignBoard()
 {
 	return g_SignBoards;
+}
+
+void SignBoardAreaPlayer(SignBoardData* signBoard)
+{
+	if (signBoard != nullptr && signBoard->active)
+	{
+		StartEffectAnimation(EFFECT_TEACH_Z, signBoard->pos.x, signBoard->pos.y);
+	}
 }
