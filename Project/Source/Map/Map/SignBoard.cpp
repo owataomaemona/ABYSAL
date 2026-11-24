@@ -100,6 +100,14 @@ void SignBoardAreaPlayer(SignBoardData* signBoard)
 {
 	if (signBoard != nullptr && signBoard->active)
 	{
-		StartEffectAnimation(EFFECT_TEACH_Z, signBoard->pos.x, signBoard->pos.y);
+		// 看板の中心座標を計算
+		float centerX = signBoard->pos.x + SIGN_BOARD_WIDTH / 2;
+		float centerY = signBoard->pos.y + SIGN_BOARD_HEIGHT / 2;
+
+		// 看板の上に表示するようにする
+		float effectX = centerX - EFFECT_ANIM_PARAM[EFFECT_TEACH_Z].width / 2;
+		float effectY = centerY - EFFECT_ANIM_PARAM[EFFECT_TEACH_Z].height - 50;
+
+		StartEffectAnimation(EFFECT_TEACH_Z, effectX, effectY);
 	}
 }
