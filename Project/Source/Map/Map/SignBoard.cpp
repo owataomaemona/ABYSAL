@@ -74,6 +74,7 @@ SignBoardData* CreateSignBoard(MapChipType type, VECTOR pos)
 			signBoard->pos = pos;
 			signBoard->type = type;
 			signBoard->isTouch = false;
+			signBoard->countChat = 0;
 			signBoard->width = SIGN_BOARD_WIDTH;
 			signBoard->height = SIGN_BOARD_HEIGHT;
 			
@@ -98,7 +99,7 @@ SignBoardData* GetSignBoard()
 
 void SignBoardAreaPlayer(SignBoardData* signBoard)
 {
-	if (signBoard != nullptr && signBoard->active)
+	if (signBoard != nullptr && signBoard->active && signBoard->countChat <= 1)
 	{
 		// 看板の中心座標を計算
 		float centerX = signBoard->pos.x + SIGN_BOARD_WIDTH / 2;
@@ -109,5 +110,9 @@ void SignBoardAreaPlayer(SignBoardData* signBoard)
 		float effectY = centerY - EFFECT_ANIM_PARAM[EFFECT_TEACH_Z].height - 50;
 
 		StartEffectAnimation(EFFECT_TEACH_Z, effectX, effectY);
+	}
+	else if(signBoard != nullptr && signBoard->active && signBoard->countChat == 2)
+	{
+
 	}
 }

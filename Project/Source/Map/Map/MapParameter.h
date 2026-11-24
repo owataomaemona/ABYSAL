@@ -58,6 +58,7 @@ struct SignBoardData // 看板
 {
 	bool active;
 	bool isTouch; // 範囲に触ったか
+	int countChat;    // チャットカウント
 	int handle;
 	MapChipType type;
 	VECTOR pos;

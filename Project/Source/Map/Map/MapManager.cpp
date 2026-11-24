@@ -248,6 +248,8 @@ void CheckSignBoardPlayer()
 					{
 						mapChipData.signBoard->isTouch = true;
 
+						mapChipData.signBoard->countChat++;
+
 						SignBoardAreaPlayer(mapChipData.signBoard);
 					}
 
