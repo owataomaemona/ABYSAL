@@ -24,7 +24,7 @@ enum MapChipType
 };
 /*------------------------------------------------------------*/
 
-struct BlockData 
+struct BlockData // 床ブロック
 {
 	bool active;
 	int handle;
@@ -33,8 +33,7 @@ struct BlockData
 	float width;
 	float height;
 };
-
-struct SeaMineData
+struct SeaMineData // 機雷
 {
 	bool active;
 	bool isSeaMineGraze; // ギリギリ回避に当たってる
@@ -46,8 +45,7 @@ struct SeaMineData
 	float width;
 	float height;
 };
-
-struct InvisibleData
+struct InvisibleData // 透明床(天井)
 {
 	bool active;
 	int handle;
@@ -56,11 +54,10 @@ struct InvisibleData
 	float width;
 	float height;
 };
-
-struct SignBoardData
+struct SignBoardData // 看板
 {
 	bool active;
-	bool isRead;
+	bool isTouch; // 範囲に触ったか
 	int handle;
 	MapChipType type;
 	VECTOR pos;

@@ -244,9 +244,9 @@ void CheckSignBoardPlayer()
 				if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_RADIUS,
 					signBoardCenterX, signBoardCenterY, SIGN_BOARD_RADIUS))
 				{
-					if (!mapChipData.signBoard->isRead)
+					if (!mapChipData.signBoard->isTouch)
 					{
-						mapChipData.signBoard->isRead = true;
+						mapChipData.signBoard->isTouch = true;
 
 						SignBoardAreaPlayer(mapChipData.signBoard);
 					}

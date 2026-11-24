@@ -43,6 +43,15 @@
     <Filter Include="Source\Map\SeaMine">
       <UniqueIdentifier>{5981b3bc-a62e-444f-9ce8-d1520a636993}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Map\Enemy">
+      <UniqueIdentifier>{8b3e3cf6-7c4a-473c-864f-3ad80b08bdab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\BossEnemy">
+      <UniqueIdentifier>{97de23ac-21dc-4905-a33f-1e974e997f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\BossEnemy\FirstBoss">
+      <UniqueIdentifier>{c7a6a36e-87ea-4948-b06f-1f844d7fc46c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -95,6 +104,12 @@
     </ClCompile>
     <ClCompile Include="Source\Map\Map\SignBoard.cpp">
       <Filter>Source\Map\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BossEnemy\BossEnemyManager.cpp">
+      <Filter>Source\BossEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BossEnemy\FirstBoss\FirstBoss.cpp">
+      <Filter>Source\BossEnemy\FirstBoss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +166,15 @@
     </ClInclude>
     <ClInclude Include="Source\Map\Map\SignBoard.h">
       <Filter>Source\Map\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BossEnemy\BossEnemyManager.h">
+      <Filter>Source\BossEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BossEnemy\BossEnemyParameter.h">
+      <Filter>Source\BossEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BossEnemy\FirstBoss\FirstBoss.h">
+      <Filter>Source\BossEnemy\FirstBoss</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
