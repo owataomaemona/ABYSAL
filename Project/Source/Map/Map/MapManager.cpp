@@ -94,6 +94,7 @@ void CheckMapPlayer()
 				if (mapChipData.mapChip == SEA_MINE_BLOCK ||
 					mapChipData.mapChip == INVISIBLE_BLOCK ||
 					mapChipData.mapChip == SIGN_BOARD_BLOCK ||
+					mapChipData.mapChip == SIGN_BOARD_BLOCK_2 ||
 					mapChipData.mapChip == 0) continue;
 
 				if (CheckSquareSquare(player->pos.x, player->beforePos.y, player->width, player->height,
@@ -129,6 +130,7 @@ void CheckMapPlayer()
 				if (mapChipData.mapChip == SEA_MINE_BLOCK ||
 					mapChipData.mapChip == INVISIBLE_BLOCK ||
 					mapChipData.mapChip == SIGN_BOARD_BLOCK ||
+					mapChipData.mapChip == SIGN_BOARD_BLOCK_2 ||
 					mapChipData.mapChip == 0) continue;
 
 				// 矩形と矩形で当たり判定を取る
@@ -231,8 +233,9 @@ void CheckSignBoardPlayer()
 			{
 				// マップチップ取得
 				MapChipData mapChipData = GetMapChipData(x, y);
-				// マップチップがSIGN_BOARD_BLOCK以外の場合は何もしない
-				if (mapChipData.mapChip != SIGN_BOARD_BLOCK) continue;
+				// マップチップがSIGN_BOARD_BLOCKとSIGN_BOARD_BLOCK_2以外の場合は何もしない
+				if (mapChipData.mapChip != SIGN_BOARD_BLOCK &&
+					mapChipData.mapChip != SIGN_BOARD_BLOCK_2) continue;
 
 				// 機雷のポインタが空でないか確認
 				if (mapChipData.signBoard == nullptr) continue;
@@ -248,12 +251,8 @@ void CheckSignBoardPlayer()
 					{
 						mapChipData.signBoard->isTouch = true;
 
-						mapChipData.signBoard->countChat++;
-
 						SignBoardAreaPlayer(mapChipData.signBoard);
 					}
-
-					continue;
 				}
 			}
 		}

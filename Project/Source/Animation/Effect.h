@@ -6,6 +6,7 @@ enum EffectType
 	EFFECT_NICE,
 	EFFECT_FLASH,
 	EFFECT_TEACH_Z,
+	EFFECT_TEACH_V,
 	EFFECT_MAX,
 	EFFECT_NONE = -1
 };
@@ -34,10 +35,11 @@ struct EffectAnimationParam
 };
 const EffectAnimationParam EFFECT_ANIM_PARAM[EFFECT_MAX] =
 {
-	8,7,192,192,  // BOMB
-	6,12,99,141,  // NICE
-	6,6,128,128,  // FRASH
+	8,7,192,192,   // BOMB
+	6,12,99,141,   // NICE
+	6,6,128,128,   // FRASH
 	12,35,300,156, // TEACH_Z
+	12,83,300,156, // TEACH_V
 };
 
 void InitEffectAnimation();

@@ -30,6 +30,7 @@ void LoadEffectAnimation()
 	g_EffectHandle[EFFECT_NICE] = LoadGraph("Data/Effect/NICE!.png");
 	g_EffectHandle[EFFECT_FLASH] = LoadGraph("Data/Effect/DiverFlash.png");
 	g_EffectHandle[EFFECT_TEACH_Z] = LoadGraph("Data/Effect/ChatAnim(1).png");
+	g_EffectHandle[EFFECT_TEACH_V] = LoadGraph("Data/Effect/ChatAnim(2).png");
 }
 
 void StepEffectAnimation()

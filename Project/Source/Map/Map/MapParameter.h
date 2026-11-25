@@ -11,15 +11,16 @@
 enum MapChipType
 {
 	MAP_CHIP_NONE,
-	NORMAL_BLOCK,     // ここから
-	NORMAL_BLOCK_2,   // 
-	NORMAL_BLOCK_3,   //
-	NORMAL_BLOCK_4,   //
-	NORMAL_BLOCK_5,   //
-	NORMAL_BLOCK_6,   // ここまでブロック
-	SEA_MINE_BLOCK,   // 機雷
-	INVISIBLE_BLOCK,  // 透明ブロック(天井や床用)
-	SIGN_BOARD_BLOCK, // 看板ブロック(アニメーション)
+	NORMAL_BLOCK,       // ここから
+	NORMAL_BLOCK_2,     // 
+	NORMAL_BLOCK_3,     //
+	NORMAL_BLOCK_4,     //
+	NORMAL_BLOCK_5,     //
+	NORMAL_BLOCK_6,     // ここまでブロック
+	SEA_MINE_BLOCK,     // 機雷
+	INVISIBLE_BLOCK,    // 透明ブロック(天井や床用)
+	SIGN_BOARD_BLOCK,   // 看板ブロック(アニメーション)
+	SIGN_BOARD_BLOCK_2, // 看板2
 	BLOCK_TYPE_MAX,
 };
 /*------------------------------------------------------------*/
@@ -58,7 +59,6 @@ struct SignBoardData // 看板
 {
 	bool active;
 	bool isTouch; // 範囲に触ったか
-	int countChat;    // チャットカウント
 	int handle;
 	MapChipType type;
 	VECTOR pos;

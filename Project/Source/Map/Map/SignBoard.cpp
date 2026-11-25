@@ -22,6 +22,7 @@ void InitSignBoard()
 void LoadSignBoard()
 {
 	g_SignBoardHandle[SIGN_BOARD_BLOCK] = LoadGraph("Data/Map/SignBoard.png");
+	g_SignBoardHandle[SIGN_BOARD_BLOCK_2] = LoadGraph("Data/Map/SignBoard.png");
 }
 
 void StepSignBoard()
@@ -74,7 +75,6 @@ SignBoardData* CreateSignBoard(MapChipType type, VECTOR pos)
 			signBoard->pos = pos;
 			signBoard->type = type;
 			signBoard->isTouch = false;
-			signBoard->countChat = 0;
 			signBoard->width = SIGN_BOARD_WIDTH;
 			signBoard->height = SIGN_BOARD_HEIGHT;
 			
@@ -99,20 +99,32 @@ SignBoardData* GetSignBoard()
 
 void SignBoardAreaPlayer(SignBoardData* signBoard)
 {
-	if (signBoard != nullptr && signBoard->active && signBoard->countChat <= 1)
+	if (signBoard != nullptr && signBoard->active)
 	{
+		EffectType effectType = EFFECT_NONE;
+
+		if (signBoard->type == SIGN_BOARD_BLOCK)
+		{
+			effectType = EFFECT_TEACH_Z;
+		}
+		else if (signBoard->type == SIGN_BOARD_BLOCK_2)
+		{
+			effectType = EFFECT_TEACH_V;
+		}
+		else
+		{
+			return;
+		}
+
 		// 看板の中心座標を計算
 		float centerX = signBoard->pos.x + SIGN_BOARD_WIDTH / 2;
 		float centerY = signBoard->pos.y + SIGN_BOARD_HEIGHT / 2;
 
 		// 看板の上に表示するようにする
-		float effectX = centerX - EFFECT_ANIM_PARAM[EFFECT_TEACH_Z].width / 2;
-		float effectY = centerY - EFFECT_ANIM_PARAM[EFFECT_TEACH_Z].height - 50;
+		float effectX = centerX - EFFECT_ANIM_PARAM[effectType].width / 2;
+		float effectY = centerY - EFFECT_ANIM_PARAM[effectType].height - 50;
 
-		StartEffectAnimation(EFFECT_TEACH_Z, effectX, effectY);
+		StartEffectAnimation(effectType, effectX, effectY);
 	}
-	else if(signBoard != nullptr && signBoard->active && signBoard->countChat == 2)
-	{
-
-	}
+	
 }
