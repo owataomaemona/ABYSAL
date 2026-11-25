@@ -208,18 +208,18 @@ void UpdatePlayer()
 		}
 		if (g_PlayerData.isDashDown) // elseにしない
 		{
-			g_PlayerData.move.y = PLAYER_DASH_SPEED_Y; // 重力がかかってる状態だと効かない(急降下に便利)
+			g_PlayerData.move.y += PLAYER_DASH_SPEED_Y; // 重力がかかってる状態だと効かない(急降下に便利)
 		}
 
 		if (g_PlayerData.dashMove) // ダッシュで移動するか
 		{
 			if (g_PlayerData.isTurn) // 向きの判定
 			{
-				g_PlayerData.move.x -= PLAYER_DASH_SPEED;
+				g_PlayerData.pos.x -= PLAYER_DASH_SPEED;
 			}
 			else
 			{
-				g_PlayerData.move.x += PLAYER_DASH_SPEED;
+				g_PlayerData.pos.x += PLAYER_DASH_SPEED;
 			}
 		}
 
