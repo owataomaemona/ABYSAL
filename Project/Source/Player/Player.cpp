@@ -32,6 +32,7 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 
 // プレイヤーダッシュ関連
 #define PLAYER_DASH_SPEED (12.0f)
+#define PLAYER_DASH_SPEED_Y (5.0f)
 #define PLAYER_DASH_TIME (14)
 
 // ジャンプ力
@@ -62,6 +63,9 @@ void InitPlayer()
 	g_PlayerData.isDash = false;
 	g_PlayerData.dashMove = false;
 	g_PlayerData.dashTimer = 0.0f;
+
+	g_PlayerData.isDashUp = false;
+	g_PlayerData.isDashDown = false;
 
 	g_PlayerData.active = false;
 	g_PlayerData.isDead = false;
@@ -153,13 +157,21 @@ void StepPlayer()
 
 		PlayerFrash();
 
-		if (IsInputKey(KEY_LEFT) || IsInputKey(KEY_RIGHT) || IsInputKey(KEY_UP) || IsInputKey(KEY_DOWN))
+		g_PlayerData.dashMove = false;
+		g_PlayerData.isDashUp = false;
+		g_PlayerData.isDashDown = false;
+
+		if (IsInputKey(KEY_LEFT) || IsInputKey(KEY_RIGHT))
 		{
 			g_PlayerData.dashMove = true;
 		}
-		else
+		if (IsInputKey(KEY_UP)) // elseにしない
 		{
-			g_PlayerData.dashMove = false;
+			g_PlayerData.isDashUp = true;
+		}
+		if(IsInputKey(KEY_DOWN))
+		{
+			g_PlayerData.isDashDown = true;
 		}
 	}
 }
@@ -187,15 +199,27 @@ void UpdatePlayer()
 	{
 		g_PlayerData.dashTimer--; // タイマーを減らす
 
+		// 上下のダッシュ中は重力を0にする
+		g_PlayerData.move.y = 0.0f;
+
+		if (g_PlayerData.isDashUp)
+		{
+			g_PlayerData.move.y -= PLAYER_DASH_SPEED_Y;
+		}
+		if (g_PlayerData.isDashDown) // elseにしない
+		{
+			g_PlayerData.move.y = PLAYER_DASH_SPEED_Y; // 重力がかかってる状態だと効かない(急降下に便利)
+		}
+
 		if (g_PlayerData.dashMove) // ダッシュで移動するか
 		{
 			if (g_PlayerData.isTurn) // 向きの判定
 			{
-				g_PlayerData.pos.x -= PLAYER_DASH_SPEED;
+				g_PlayerData.move.x -= PLAYER_DASH_SPEED;
 			}
 			else
 			{
-				g_PlayerData.pos.x += PLAYER_DASH_SPEED;
+				g_PlayerData.move.x += PLAYER_DASH_SPEED;
 			}
 		}
 
@@ -203,6 +227,8 @@ void UpdatePlayer()
 		{
 			g_PlayerData.isDash = false;
 			g_PlayerData.dashMove = false;
+			g_PlayerData.isDashUp = false;
+			g_PlayerData.isDashDown = false;
 		}
 	}
 
@@ -333,6 +359,8 @@ void PlayerDead()
 		g_PlayerData.isDash = false;
 		g_PlayerData.dashMove = false;
 		g_PlayerData.dashTimer = 0.0f;
+		g_PlayerData.isDashUp = false;
+		g_PlayerData.isDashDown = false;
 
 		StartPlayerAnimation(PLAYER_ANIM_DEAD);
 	}
