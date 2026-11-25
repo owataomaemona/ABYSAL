@@ -153,7 +153,7 @@ void StepPlayer()
 
 		PlayerFrash();
 
-		if (IsInputKey(KEY_LEFT) || IsInputKey(KEY_RIGHT)) 
+		if (IsInputKey(KEY_LEFT) || IsInputKey(KEY_RIGHT) || IsInputKey(KEY_UP) || IsInputKey(KEY_DOWN))
 		{
 			g_PlayerData.dashMove = true;
 		}
