@@ -19,6 +19,8 @@ void StartEnemy()
 
 void StepEnemy()
 {
+	// ウニステップ
+	StepSeaUrchin();
 }
 
 void UpdateEnemy()

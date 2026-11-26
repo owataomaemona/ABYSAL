@@ -83,6 +83,7 @@ struct SeaUrchinData // ウニ
 	float height;
 	float radius;
 	MapChipType type;
+	AnimationData animation; // アニメーション
 };
 
 /*------------------------------------------------------------*/

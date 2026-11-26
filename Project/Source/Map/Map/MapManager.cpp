@@ -58,8 +58,11 @@ void StartMap()
 
 void StepMap() 
 {
-	// 看板のアニメーション更新
+	// 看板のアニメーションステップ
 	StepSignBoard();
+
+	// エネミーのアニメーションステップ
+	StepEnemy();
 }
 
 void DrawMap()
@@ -374,7 +377,7 @@ void CheckSeaUrchinPlayer()
 					mapChipData.seaUrchin->isNowGraze = false;
 
 					PlayerHitEnemy();
-					/*SeaUrchinHitPlayer(mapChipData.seaUrchin);*/
+					SeaUrchinHitPlayer(mapChipData.seaUrchin);
 
 					continue;
 				}
