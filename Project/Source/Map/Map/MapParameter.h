@@ -21,6 +21,7 @@ enum MapChipType
 	INVISIBLE_BLOCK,    // 透明ブロック(天井や床用)
 	SIGN_BOARD_BLOCK,   // 看板ブロック(アニメーション)
 	SIGN_BOARD_BLOCK_2, // 看板2
+	ENEMY_1,            // エネミー(ウニ)
 	BLOCK_TYPE_MAX,
 };
 /*------------------------------------------------------------*/
@@ -69,6 +70,23 @@ struct SignBoardData // 看板
 
 /*------------------------------------------------------------*/
 
+
+/*------------------------------------------------------------*/
+// エネミー用
+
+struct SeaUrchinData // ウニ
+{
+	bool active;
+	VECTOR pos;
+	int handle;
+	float width;
+	float height;
+	float radius;
+	MapChipType type;
+};
+
+/*------------------------------------------------------------*/
+
 struct MapChipData
 {
 	int mapChip;
@@ -76,4 +94,5 @@ struct MapChipData
 	SeaMineData* seaMine;
 	InvisibleData* invisible;
 	SignBoardData* signBoard;
+	SeaUrchinData* seaUrchin;
 };

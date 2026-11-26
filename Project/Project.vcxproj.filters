@@ -111,6 +111,12 @@
     <ClCompile Include="Source\BossEnemy\FirstBoss\FirstBoss.cpp">
       <Filter>Source\BossEnemy\FirstBoss</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Map\Enemy\SeaUrchin.cpp">
+      <Filter>Source\Map\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Map\Enemy\EnemyManager.cpp">
+      <Filter>Source\Map\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameSetting\GameSetting.h">
@@ -175,6 +181,12 @@
     </ClInclude>
     <ClInclude Include="Source\BossEnemy\FirstBoss\FirstBoss.h">
       <Filter>Source\BossEnemy\FirstBoss</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Map\Enemy\SeaUrchin.h">
+      <Filter>Source\Map\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Map\Enemy\EnemyManager.h">
+      <Filter>Source\Map\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

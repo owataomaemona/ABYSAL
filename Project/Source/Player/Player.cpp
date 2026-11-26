@@ -32,7 +32,7 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 
 // プレイヤーダッシュ関連
 #define PLAYER_DASH_SPEED (12.0f)
-#define PLAYER_DASH_SPEED_Y (5.0f)
+#define PLAYER_DASH_SPEED_Y (5.5f)
 #define PLAYER_DASH_TIME (14)
 
 // ジャンプ力

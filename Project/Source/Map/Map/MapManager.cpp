@@ -6,6 +6,7 @@
 #include "../SeaMine/SeaMine.h"
 #include "Invisible.h"
 #include "SignBoard.h"
+#include "../../Map/Enemy/EnemyManager.h"
 #include "../../Player/Player.h"
 
 // キャラクターの周囲何マスまでチェックするか
@@ -22,6 +23,11 @@ void InitMap()
 	// 看板の初期化
 	InitSignBoard();
 
+	// 透明ブロックの初期化
+	InitInvisible();
+
+	// エネミーの初期化
+	InitEnemy();
 }
 
 void LoadMap()
@@ -39,6 +45,9 @@ void LoadMap()
 
 	// 看板のロード
 	LoadSignBoard();
+
+	// エネミーのロード
+	LoadEnemy();
 }
 
 void StartMap()
@@ -65,6 +74,9 @@ void DrawMap()
 
 	// 看板描画
 	DrawSignBoard();
+
+	// エネミー描画
+	DrawEnemy();
 }
 
 void FinMap()
@@ -74,6 +86,12 @@ void FinMap()
 
 	// 看板終了
 	FinSignBoard();
+
+	// 透明ブロック終了
+	FinInvisible();
+
+	// エネミー終了
+	FinEnemy();
 }
 
 void CheckMapPlayer() 
@@ -90,12 +108,14 @@ void CheckMapPlayer()
 			{
 				// マップチップ取得
 				MapChipData mapChipData = GetMapChipData(x, y);
-				// マップチップが以下と0の場合は何もない
-				if (mapChipData.mapChip == SEA_MINE_BLOCK ||
-					mapChipData.mapChip == INVISIBLE_BLOCK ||
-					mapChipData.mapChip == SIGN_BOARD_BLOCK ||
-					mapChipData.mapChip == SIGN_BOARD_BLOCK_2 ||
-					mapChipData.mapChip == 0) continue;
+				// マップチップがこれら以外の場合は何もない
+				if (mapChipData.mapChip != NORMAL_BLOCK &&
+					mapChipData.mapChip != NORMAL_BLOCK_2 &&
+					mapChipData.mapChip != NORMAL_BLOCK_3 &&
+					mapChipData.mapChip != NORMAL_BLOCK_4 &&
+					mapChipData.mapChip != NORMAL_BLOCK_5 &&
+					mapChipData.mapChip != NORMAL_BLOCK_6
+					) continue;
 
 				if (CheckSquareSquare(player->pos.x, player->beforePos.y, player->width, player->height,
 					mapChipData.block->pos.x, mapChipData.block->pos.y, mapChipData.block->width, mapChipData.block->height))
@@ -126,12 +146,14 @@ void CheckMapPlayer()
 			{
 				// マップチップ取得
 				MapChipData mapChipData = GetMapChipData(x, y);
-				// マップチップが以下と0の場合は何もない
-				if (mapChipData.mapChip == SEA_MINE_BLOCK ||
-					mapChipData.mapChip == INVISIBLE_BLOCK ||
-					mapChipData.mapChip == SIGN_BOARD_BLOCK ||
-					mapChipData.mapChip == SIGN_BOARD_BLOCK_2 ||
-					mapChipData.mapChip == 0) continue;
+				// マップチップがこれら以外の場合は何もない
+				if (mapChipData.mapChip != NORMAL_BLOCK &&
+					mapChipData.mapChip != NORMAL_BLOCK_2 &&
+					mapChipData.mapChip != NORMAL_BLOCK_3 &&
+					mapChipData.mapChip != NORMAL_BLOCK_4 &&
+					mapChipData.mapChip != NORMAL_BLOCK_5 &&
+					mapChipData.mapChip != NORMAL_BLOCK_6
+					) continue;
 
 				// 矩形と矩形で当たり判定を取る
 				if (CheckSquareSquare(player->pos.x, player->pos.y, player->width, player->height,

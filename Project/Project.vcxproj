@@ -29,6 +29,8 @@
     <ClCompile Include="Source\FPS\FPS.cpp" />
     <ClCompile Include="Source\Input\Input.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Map\Enemy\EnemyManager.cpp" />
+    <ClCompile Include="Source\Map\Enemy\SeaUrchin.cpp" />
     <ClCompile Include="Source\Map\Map\Block.cpp" />
     <ClCompile Include="Source\Map\Map\Invisible.cpp" />
     <ClCompile Include="Source\Map\Map\MapChip.cpp" />
@@ -51,6 +53,8 @@
     <ClInclude Include="Source\FPS\FPS.h" />
     <ClInclude Include="Source\GameSetting\GameSetting.h" />
     <ClInclude Include="Source\Input\Input.h" />
+    <ClInclude Include="Source\Map\Enemy\EnemyManager.h" />
+    <ClInclude Include="Source\Map\Enemy\SeaUrchin.h" />
     <ClInclude Include="Source\Map\Map\Block.h" />
     <ClInclude Include="Source\Map\Map\Invisible.h" />
     <ClInclude Include="Source\Map\Map\MapChip.h" />
