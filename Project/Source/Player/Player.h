@@ -7,7 +7,7 @@
 #define PLAYER_RADIUS	(38.0f)
 
 // プレイヤーギリギリ回避判定
-#define PLAYER_GRAZE_RADIUS	(62.0f)
+#define PLAYER_GRAZE_RADIUS	(46.0f)
 
 // アニメーションタイプ
 enum PlayerAnimationType

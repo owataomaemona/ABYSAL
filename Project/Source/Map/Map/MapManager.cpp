@@ -340,6 +340,9 @@ void CheckInvisiblePlayer()
 	}
 }
 
+// ここからエネミーの当たり判定
+/*-----------------------------------------------------------------------------------------------------------------------*/
+
 void CheckSeaUrchinPlayer()
 {
 	PlayerData* player = GetPlayer();
@@ -362,7 +365,7 @@ void CheckSeaUrchinPlayer()
 				if (mapChipData.seaUrchin == nullptr) continue;
 
 				float seaUrchinCenterX = mapChipData.seaUrchin->pos.x + SEA_URCHIN_WIDTH / 2;
-				float seaUrchinCenterY = mapChipData.seaUrchin->pos.y + SEA_URCHIN_HEIGHT / 2;
+				float seaUrchinCenterY = mapChipData.seaUrchin->pos.y + SEA_URCHIN_TOP_SPACE + SEA_URCHIN_HEIGHT / 2;
 
 				// 円で当たり判定を取る(機雷本体との当たり判定)
 				if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_RADIUS,
@@ -371,7 +374,7 @@ void CheckSeaUrchinPlayer()
 					mapChipData.seaUrchin->isNowGraze = false;
 
 					PlayerHitEnemy();
-					SeaUrchinHitPlayer(mapChipData.seaUrchin);
+					/*SeaUrchinHitPlayer(mapChipData.seaUrchin);*/
 
 					continue;
 				}
@@ -396,3 +399,7 @@ void CheckSeaUrchinPlayer()
 		}
 	}
 }
+
+
+
+/*-----------------------------------------------------------------------------------------------------------------------*/
