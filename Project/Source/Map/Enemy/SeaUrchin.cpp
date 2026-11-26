@@ -1,6 +1,7 @@
 ﻿#include "DxLib.h"
 #include "../Enemy/SeaUrchin.h"
 #include "../../Camera/Camera.h"
+#include "../../Animation/Effect.h"
 
 SeaUrchinData g_SeaUrchins[BLOCK_MAX] = { 0 };
 int g_SeaUrchinhandle[BLOCK_TYPE_MAX] = { 0 };
@@ -63,6 +64,8 @@ SeaUrchinData* CreateSeaUrchin(MapChipType type, VECTOR pos)
 			// ウニ生成
 			seaUrchin->active = true;
 			seaUrchin->handle = g_SeaUrchinhandle[type];
+			seaUrchin->isEnemyGraze = false;
+			seaUrchin->isNowGraze = false;
 			seaUrchin->pos = pos;
 			seaUrchin->type = type;
 			seaUrchin->width = SEA_URCHIN_WIDTH;
@@ -78,4 +81,27 @@ SeaUrchinData* CreateSeaUrchin(MapChipType type, VECTOR pos)
 SeaUrchinData* GetSeaUrchin()
 {
 	return g_SeaUrchins;
+}
+
+void SeaUrchinDead(SeaUrchinData* seaUrchin)
+{
+	if (seaUrchin != nullptr && seaUrchin->active)
+	{
+		seaUrchin->active = false;
+
+		// 機雷の中心座標を計算
+		float centerX = seaUrchin->pos.x + SEA_URCHIN_WIDTH / 2;
+		float centerY = seaUrchin->pos.y + SEA_URCHIN_HEIGHT / 2;
+
+		// 爆発エフェクトの半分を引いて中心を合わせる
+		float effectX = centerX - EFFECT_ANIM_PARAM[EFFECT_BOMB].width / 2;
+		float effectY = centerY - EFFECT_ANIM_PARAM[EFFECT_BOMB].height / 2;
+
+		StartEffectAnimation(EFFECT_BOMB, effectX, effectY);
+	}
+}
+
+void SeaUrchinHitPlayer(SeaUrchinData* seaUrchin) 
+{
+	SeaUrchinDead(seaUrchin);
 }

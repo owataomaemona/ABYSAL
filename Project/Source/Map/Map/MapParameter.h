@@ -38,8 +38,6 @@ struct BlockData // 床ブロック
 struct SeaMineData // 機雷
 {
 	bool active;
-	bool isSeaMineGraze; // ギリギリ回避に当たってる
-	bool isNowGraze;      // ギリギリ判定内にいるか
 	int handle;
 	MapChipType type;
 	VECTOR pos;
@@ -77,6 +75,8 @@ struct SignBoardData // 看板
 struct SeaUrchinData // ウニ
 {
 	bool active;
+	bool isEnemyGraze; // ギリギリ回避に当たってる
+	bool isNowGraze;      // ギリギリ判定内にいるか
 	VECTOR pos;
 	int handle;
 	float width;

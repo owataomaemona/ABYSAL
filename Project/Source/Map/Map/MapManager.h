@@ -17,3 +17,5 @@ void CheckSeaMinePlayer();
 void CheckSignBoardPlayer();
 
 void CheckInvisiblePlayer();
+
+void CheckSeaUrchinPlayer();

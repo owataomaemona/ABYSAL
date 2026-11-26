@@ -16,3 +16,6 @@ void FinSeaUrchin();
 
 SeaUrchinData* CreateSeaUrchin(MapChipType type, VECTOR pos);
 SeaUrchinData* GetSeaUrchin();
+
+// 当たり判定
+void SeaUrchinHitPlayer(SeaUrchinData* seaUrchin);

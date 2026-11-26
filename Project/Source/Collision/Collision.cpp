@@ -125,7 +125,7 @@ void CheckCollision()
 	// プレイヤーとマップの当たり判定
 	CheckMapPlayer();
 
-	// プレイヤーと機雷の当たり判定とギリギリ回避判定
+	// プレイヤーと機雷の当たり判定
 	CheckSeaMinePlayer();
 
 	// プレイヤーと看板(範囲は大きく)の当たり判定
@@ -133,5 +133,8 @@ void CheckCollision()
 
 	// プレイヤーと透明ブロックの当たり判定
 	CheckInvisiblePlayer();
+
+	// プレイヤーとウニの当たり判定とギリギリ回避判定
+	CheckSeaUrchinPlayer();
 }
 

@@ -56,7 +56,9 @@ PlayerData* GetPlayer();
 
 // 機雷と当たった時
 void PlayerHitSeaMine();
+// エネミーと当たった時
+void PlayerHitEnemy();
 // 機雷ギリギリ回避
-void GrazePlayerHitSeaMine(PlayerData* player);
+void GrazePlayerHitEnemy(PlayerData* player);
 // フラッシュアニメーション用
 void PlayerFrash();

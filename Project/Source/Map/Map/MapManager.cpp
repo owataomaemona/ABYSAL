@@ -6,6 +6,7 @@
 #include "../SeaMine/SeaMine.h"
 #include "Invisible.h"
 #include "SignBoard.h"
+#include "../Enemy/SeaUrchin.h"
 #include "../../Map/Enemy/EnemyManager.h"
 #include "../../Player/Player.h"
 
@@ -211,29 +212,10 @@ void CheckSeaMinePlayer()
 				if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_RADIUS,
 					seaMineCenterX, seaMineCenterY, SEA_MINE_RADIUS))
 				{
-					mapChipData.seaMine->isNowGraze = false;
-
 					PlayerHitSeaMine();
 					SeaMineHitPlayer(mapChipData.seaMine);
 
 					continue;
-				}
-				// ギリギリ判定(離脱判定)
-				if (!mapChipData.seaMine->isSeaMineGraze) // まだギリギリ判定してないか
-				{
-					if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_GRAZE_RADIUS,
-						seaMineCenterX, seaMineCenterY, SEA_MINE_RADIUS))
-					{
-						// この当たり判定内にいるときにisNowGrazeがtrueになる
-						mapChipData.seaMine->isNowGraze = true;
-					}
-					// isNowGrazeから離れたとき
-					else if(mapChipData.seaMine->isNowGraze)
-					{
-						mapChipData.seaMine->isNowGraze = false;
-						mapChipData.seaMine->isSeaMineGraze = true;
-						GrazePlayerHitSeaMine(player);
-					}
 				}
 			}
 		}
@@ -352,6 +334,63 @@ void CheckInvisiblePlayer()
 
 					// 移動量は0にする
 					player->move.y = 0.0f;
+				}
+			}
+		}
+	}
+}
+
+void CheckSeaUrchinPlayer()
+{
+	PlayerData* player = GetPlayer();
+
+	if (player->active || player != nullptr)
+	{
+		float playerCenterX = player->pos.x + PLAYER_WIDTH / 2;
+		float playerCenterY = player->pos.y + PLAYER_HEIGHT / 2;
+
+		for (int y = 0; y < MAP_CHIP_Y_NUM; y++)
+		{
+			for (int x = 0; x < MAP_CHIP_X_NUM; x++)
+			{
+				// マップチップ取得
+				MapChipData mapChipData = GetMapChipData(x, y);
+				// マップチップがENEMY_1以外の場合は何もしない
+				if (mapChipData.mapChip != ENEMY_1) continue;
+
+				// 機雷のポインタが空でないか確認
+				if (mapChipData.seaUrchin == nullptr) continue;
+
+				float seaUrchinCenterX = mapChipData.seaUrchin->pos.x + SEA_URCHIN_WIDTH / 2;
+				float seaUrchinCenterY = mapChipData.seaUrchin->pos.y + SEA_URCHIN_HEIGHT / 2;
+
+				// 円で当たり判定を取る(機雷本体との当たり判定)
+				if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_RADIUS,
+					seaUrchinCenterX, seaUrchinCenterY, SEA_URCHIN_RADIUS))
+				{
+					mapChipData.seaUrchin->isNowGraze = false;
+
+					PlayerHitEnemy();
+					SeaUrchinHitPlayer(mapChipData.seaUrchin);
+
+					continue;
+				}
+				// ギリギリ判定(離脱判定)
+				if (!mapChipData.seaUrchin->isEnemyGraze) // まだギリギリ判定してないか
+				{
+					if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_GRAZE_RADIUS,
+						seaUrchinCenterX, seaUrchinCenterY, SEA_URCHIN_RADIUS))
+					{
+						// この当たり判定内にいるときにisNowGrazeがtrueになる
+						mapChipData.seaUrchin->isNowGraze = true;
+					}
+					// isNowGrazeから離れたとき
+					else if (mapChipData.seaUrchin->isNowGraze)
+					{
+						mapChipData.seaUrchin->isNowGraze = false;
+						mapChipData.seaUrchin->isEnemyGraze = true;
+						GrazePlayerHitEnemy(player);
+					}
 				}
 			}
 		}

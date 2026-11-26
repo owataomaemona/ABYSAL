@@ -371,7 +371,12 @@ void PlayerHitSeaMine()
 	PlayerDead();
 }
 
-void GrazePlayerHitSeaMine(PlayerData* player)
+void PlayerHitEnemy()
+{
+	PlayerDead();
+}
+
+void GrazePlayerHitEnemy(PlayerData* player)
 {
 	// プレイヤーの中心座標を計算
 	float centerX = player->pos.x + PLAYER_WIDTH / 2;
