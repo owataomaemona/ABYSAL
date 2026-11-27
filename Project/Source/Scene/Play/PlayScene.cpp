@@ -92,8 +92,8 @@ void DrawPlayScene()
 	// エフェクト描画
 	DrawEffectAnimation();
 
-	// カメラ描画
-	DrawCamera();
+	//// カメラ描画
+	//DrawCamera();
 }
 
 void FinPlayScene()

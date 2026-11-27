@@ -72,7 +72,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_  HINSTANCE hPrevInstance, 
 		UpdateFPS();
 
 		// FPS描画
-		DrawFPS();
+		/*DrawFPS();*/
 
 		// 1フレームが速すぎたら待機
 		FPSWait();
