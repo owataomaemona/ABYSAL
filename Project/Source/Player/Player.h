@@ -26,6 +26,7 @@ struct PlayerData
 {
 	bool active;								// 生存フラグ
 	bool isDead;                                // 死亡したか
+	bool invisible;				                // 無敵フラグ
 	bool isTurn;								// 左を向いているか
 	bool isAir;									// 空中にいるか
 	bool isDash;                                // ダッシュ中
@@ -34,6 +35,7 @@ struct PlayerData
 	bool isDashUp;                              // 上にダッシュするか
 	bool isDashDown;                            // 下にダッシュするか
 	int life;                                   // 体力
+	int hitInvincible;                          // エネミーに当たった時の無敵時間
 	VECTOR pos;                                 // 座標
 	VECTOR beforePos;                           // 前にいた座標
 	VECTOR move;                                // 移動量

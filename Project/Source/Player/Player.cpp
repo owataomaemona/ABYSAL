@@ -39,11 +39,11 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 // ジャンプ力
 #define PLAYER_JUMP_POWER (4.0f)
 
-// 長押ししたときのジャンプ力
-#define PLAYER_BIG_JUMP_POWER (6.0f)
-
 // 重力
 #define PLAYER_GRAVITY (0.1f)
+
+// 敵に当たった時の無敵時間
+#define PLAYER_HIT_ENEMY_INVISIBLE_TIME (180)
 
 PlayerData g_PlayerData = { 0 };
 PlayerData g_PrevPlayerData = { 0 };
@@ -71,6 +71,8 @@ void InitPlayer()
 	g_PlayerData.active = false;
 	g_PlayerData.life = 0;
 	g_PlayerData.isDead = false;
+	g_PlayerData.invisible = false;
+	g_PlayerData.hitInvincible = 0;
 
 	g_PlayerData.isAir = false;
 
@@ -179,6 +181,12 @@ void StepPlayer()
 			g_PlayerData.isDashDown = true;
 		}
 	}
+
+	// 無敵中の処理
+	if (g_PlayerData.invisible)
+	{
+		g_PlayerData.hitInvincible--;
+	}
 }
 
 void UpdatePlayer()
@@ -252,6 +260,12 @@ void UpdatePlayer()
 	if (g_PlayerData.pos.x < camera.pos.x) // プレイヤーの横座標がカメラの横座標より小さくなったら
 	{
 		g_PlayerData.pos.x = camera.pos.x; // プレイヤーの横座標をカメラの横座標と同じにする
+	}
+
+	// 無敵解除チェック
+	if (g_PlayerData.invisible && g_PlayerData.hitInvincible <= 0) 
+	{
+		g_PlayerData.invisible = false;
 	}
 }
 
@@ -378,7 +392,16 @@ void PlayerHitSeaMine()
 
 void PlayerHitEnemy()
 {
-	PlayerDead();
+	// 無敵状態
+	g_PlayerData.invisible = true;
+	g_PlayerData.hitInvincible = PLAYER_HIT_ENEMY_INVISIBLE_TIME;
+
+	g_PlayerData.life--;
+
+	if (g_PlayerData.life <= 0)
+	{
+		PlayerDead();
+	}
 }
 
 void GrazePlayerHitEnemy(PlayerData* player)
