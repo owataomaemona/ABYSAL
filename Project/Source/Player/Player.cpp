@@ -433,15 +433,34 @@ void PlayerHitEnemy()
 
 void GrazePlayerHitEnemy(PlayerData* player)
 {
-	// プレイヤーの中心座標を計算
-	float centerX = player->pos.x + PLAYER_WIDTH / 2;
-	float centerY = player->pos.y + PLAYER_HEIGHT / 2;
+	if (g_PlayerData.life <= 2)
+	{
+		// 体力回復
+		g_PlayerData.life++;
 
-	// プレイヤーの左斜め上に出るようにする
-	float effectX = centerX - EFFECT_ANIM_PARAM[EFFECT_NICE].width;
-	float effectY = centerY - EFFECT_ANIM_PARAM[EFFECT_NICE].height;
+		// プレイヤーの中心座標を計算
+		float centerX = player->pos.x + PLAYER_WIDTH / 2;
+		float centerY = player->pos.y + PLAYER_HEIGHT / 2;
 
-	StartEffectAnimation(EFFECT_NICE, effectX, effectY);
+		// プレイヤーの左斜め上に出るようにする
+		float effectX = centerX - EFFECT_ANIM_PARAM[EFFECT_NICE].width;
+		float effectY = centerY - EFFECT_ANIM_PARAM[EFFECT_NICE].height;
+
+		StartEffectAnimation(EFFECT_NICE, effectX, effectY);
+	}
+	else
+	{
+		// プレイヤーの中心座標を計算
+		float centerX = player->pos.x + PLAYER_WIDTH / 2;
+		float centerY = player->pos.y + PLAYER_HEIGHT / 2;
+
+		// プレイヤーの左斜め上に出るようにする
+		float effectX = centerX - EFFECT_ANIM_PARAM[EFFECT_NICE].width;
+		float effectY = centerY - EFFECT_ANIM_PARAM[EFFECT_NICE].height;
+
+		StartEffectAnimation(EFFECT_NICE, effectX, effectY);
+	}
+
 }
 
 void PlayerFlash()
