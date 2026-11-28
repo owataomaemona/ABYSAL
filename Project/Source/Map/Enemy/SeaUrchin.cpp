@@ -104,6 +104,6 @@ SeaUrchinData* GetSeaUrchin()
 
 void SeaUrchinHitPlayer(SeaUrchinData* seaUrchin) 
 {
-	seaUrchin->isEnemyGraze = false;
+	seaUrchin->isEnemyGraze = true;
 	seaUrchin->isNowGraze = false;
 }

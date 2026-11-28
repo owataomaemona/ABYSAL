@@ -43,11 +43,7 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 #define PLAYER_GRAVITY (0.1f)
 
 // 敵に当たった時の無敵時間
-#define PLAYER_HIT_ENEMY_INVISIBLE_TIME (80)
-
-// ノックバックの移動量
-#define PLAYER_BACK_X (5.0f)
-#define PLAYER_BACK_Y (-4.0f)
+#define PLAYER_HIT_ENEMY_INVISIBLE_TIME (120)
 
 PlayerData g_PlayerData = { 0 };
 PlayerData g_PrevPlayerData = { 0 };
@@ -431,17 +427,6 @@ void PlayerHitEnemy()
 		g_PlayerData.dashTimer = 0.0f;
 		g_PlayerData.isDashUp = false;
 		g_PlayerData.isDashDown = false;
-
-		// ノックバック
-		g_PlayerData.move.y = PLAYER_BACK_Y;
-		if (g_PlayerData.isTurn)
-		{
-			g_PlayerData.move.x += PLAYER_BACK_X;
-		}
-		else
-		{
-			g_PlayerData.move.x -= PLAYER_BACK_X;
-		}
 
 	}
 }
