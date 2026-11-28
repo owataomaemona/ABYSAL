@@ -29,7 +29,7 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 #define PLAYER_DEFAULT_POS_X (100.0f)
 #define PLAYER_DEFAULT_POS_Y (2000.0f)
 #define PLAYER_MOVE_SPEED (2.0f)
-#define PLAYER_LIFE (3)
+#define PLAYER_LIFE (4)
 
 // プレイヤーダッシュ関連
 #define PLAYER_DASH_SPEED (12.0f)
@@ -43,7 +43,11 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 #define PLAYER_GRAVITY (0.1f)
 
 // 敵に当たった時の無敵時間
-#define PLAYER_HIT_ENEMY_INVISIBLE_TIME (180)
+#define PLAYER_HIT_ENEMY_INVISIBLE_TIME (80)
+
+// ノックバックの移動量
+#define PLAYER_BACK_X (5.0f)
+#define PLAYER_BACK_Y (-4.0f)
 
 PlayerData g_PlayerData = { 0 };
 PlayerData g_PrevPlayerData = { 0 };
@@ -162,7 +166,7 @@ void StepPlayer()
 
 		StartPlayerAnimation(PLAYER_ANIM_DASH);
 
-		PlayerFrash();
+		PlayerFlash();
 
 		g_PlayerData.dashMove = false;
 		g_PlayerData.isDashUp = false;
@@ -267,6 +271,7 @@ void UpdatePlayer()
 	{
 		g_PlayerData.invisible = false;
 	}
+
 }
 
 void DrawPlayer()
@@ -276,6 +281,16 @@ void DrawPlayer()
 
 	// カメラ取得
 	CameraData camera = GetCamera();
+
+	// 無敵時間中の点滅処理
+	if (g_PlayerData.invisible)
+	{
+		// 4フレームごとに描画するしないを切り替える
+		if ((g_PlayerData.hitInvincible / 4) % 2 == 0)
+		{
+			return;
+		}
+	}
 
 	// アニメーション描画でプレイヤーを描画する
 	PlayerAnimationType animType = g_PlayerData.playAnim;
@@ -374,6 +389,10 @@ void PlayerDead()
 	{
 		g_PlayerData.isDead = true;
 
+		// 無敵状態を解除
+		g_PlayerData.invisible = false;
+		g_PlayerData.hitInvincible = 0;
+
 		// ↓ダッシュ中に死亡してもアニメーションを固まらせないために追加
 		g_PlayerData.isDash = false;
 		g_PlayerData.dashMove = false;
@@ -392,15 +411,38 @@ void PlayerHitSeaMine()
 
 void PlayerHitEnemy()
 {
-	// 無敵状態
-	g_PlayerData.invisible = true;
-	g_PlayerData.hitInvincible = PLAYER_HIT_ENEMY_INVISIBLE_TIME;
+	if (g_PlayerData.invisible || g_PlayerData.isDead) return;
 
 	g_PlayerData.life--;
 
 	if (g_PlayerData.life <= 0)
 	{
 		PlayerDead();
+	}
+	else
+	{
+		// 無敵状態
+		g_PlayerData.invisible = true;
+		g_PlayerData.hitInvincible = PLAYER_HIT_ENEMY_INVISIBLE_TIME;
+
+		// ダッシュ中の場合は強制解除
+		g_PlayerData.isDash = false;
+		g_PlayerData.dashMove = false;
+		g_PlayerData.dashTimer = 0.0f;
+		g_PlayerData.isDashUp = false;
+		g_PlayerData.isDashDown = false;
+
+		// ノックバック
+		g_PlayerData.move.y = PLAYER_BACK_Y;
+		if (g_PlayerData.isTurn)
+		{
+			g_PlayerData.move.x += PLAYER_BACK_X;
+		}
+		else
+		{
+			g_PlayerData.move.x -= PLAYER_BACK_X;
+		}
+
 	}
 }
 
@@ -417,7 +459,7 @@ void GrazePlayerHitEnemy(PlayerData* player)
 	StartEffectAnimation(EFFECT_NICE, effectX, effectY);
 }
 
-void PlayerFrash()
+void PlayerFlash()
 {
 	// プレイヤーの中心座標を計算
 	float centerX = g_PlayerData.pos.x + PLAYER_WIDTH / 2;

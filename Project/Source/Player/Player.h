@@ -64,4 +64,4 @@ void PlayerHitEnemy();
 // 機雷ギリギリ回避
 void GrazePlayerHitEnemy(PlayerData* player);
 // フラッシュアニメーション用
-void PlayerFrash();
+void PlayerFlash();

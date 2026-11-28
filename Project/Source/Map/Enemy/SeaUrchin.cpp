@@ -102,25 +102,8 @@ SeaUrchinData* GetSeaUrchin()
 	return g_SeaUrchins;
 }
 
-void SeaUrchinDead(SeaUrchinData* seaUrchin)
-{
-	if (seaUrchin != nullptr && seaUrchin->active)
-	{
-		seaUrchin->active = false;
-
-		// 機雷の中心座標を計算
-		float centerX = seaUrchin->pos.x + SEA_URCHIN_WIDTH / 2;
-		float centerY = seaUrchin->pos.y + SEA_URCHIN_HEIGHT / 2;
-
-		// 爆発エフェクトの半分を引いて中心を合わせる
-		float effectX = centerX - EFFECT_ANIM_PARAM[EFFECT_BOMB].width / 2;
-		float effectY = centerY - EFFECT_ANIM_PARAM[EFFECT_BOMB].height / 2;
-
-		StartEffectAnimation(EFFECT_BOMB, effectX, effectY);
-	}
-}
-
 void SeaUrchinHitPlayer(SeaUrchinData* seaUrchin) 
 {
-	SeaUrchinDead(seaUrchin);
+	seaUrchin->isEnemyGraze = false;
+	seaUrchin->isNowGraze = false;
 }

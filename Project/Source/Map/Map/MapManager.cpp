@@ -365,13 +365,16 @@ void CheckSeaUrchinPlayer()
 				// マップチップがENEMY_1以外の場合は何もしない
 				if (mapChipData.mapChip != ENEMY_1) continue;
 
-				// 機雷のポインタが空でないか確認
+				// ウニのポインタが空でないか確認
 				if (mapChipData.seaUrchin == nullptr) continue;
+
+				// 無敵時間はギリギリ判定を行わない
+				if (player->invisible) continue;
 
 				float seaUrchinCenterX = mapChipData.seaUrchin->pos.x + SEA_URCHIN_WIDTH / 2;
 				float seaUrchinCenterY = mapChipData.seaUrchin->pos.y + SEA_URCHIN_TOP_SPACE + SEA_URCHIN_HEIGHT / 2;
 
-				// 円で当たり判定を取る(機雷本体との当たり判定)
+				// 円で当たり判定を取る(エネミー本体との当たり判定)
 				if (CheckCircleCircle(playerCenterX, playerCenterY, PLAYER_RADIUS,
 					seaUrchinCenterX, seaUrchinCenterY, SEA_URCHIN_RADIUS))
 				{
