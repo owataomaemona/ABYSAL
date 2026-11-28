@@ -33,6 +33,7 @@ struct PlayerData
 	float dashTimer;                            // ダッシュ時間
 	bool isDashUp;                              // 上にダッシュするか
 	bool isDashDown;                            // 下にダッシュするか
+	int life;                                   // 体力
 	VECTOR pos;                                 // 座標
 	VECTOR beforePos;                           // 前にいた座標
 	VECTOR move;                                // 移動量

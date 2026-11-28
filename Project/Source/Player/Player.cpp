@@ -29,6 +29,7 @@ const PlayerAnimationParam PLAYER_ANIM_PARAM[PLAYER_ANIM_MAX] =
 #define PLAYER_DEFAULT_POS_X (100.0f)
 #define PLAYER_DEFAULT_POS_Y (2000.0f)
 #define PLAYER_MOVE_SPEED (2.0f)
+#define PLAYER_LIFE (3)
 
 // プレイヤーダッシュ関連
 #define PLAYER_DASH_SPEED (12.0f)
@@ -68,6 +69,7 @@ void InitPlayer()
 	g_PlayerData.isDashDown = false;
 
 	g_PlayerData.active = false;
+	g_PlayerData.life = 0;
 	g_PlayerData.isDead = false;
 
 	g_PlayerData.isAir = false;
@@ -94,6 +96,9 @@ void StartPlayer()
 {
 	// 生存フラグを立てる
 	g_PlayerData.active = true;
+
+	// 体力を初期化
+	g_PlayerData.life = PLAYER_LIFE;
 
 	// 死亡フラグも立てる(死亡アニメーションを組み込むため)
 	g_PlayerData.isDead = false;
