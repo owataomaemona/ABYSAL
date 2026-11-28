@@ -7,6 +7,7 @@ enum EffectType
 	EFFECT_FLASH,
 	EFFECT_TEACH_Z,
 	EFFECT_TEACH_V,
+	EFFECT_TEACH_ENEMY,
 	EFFECT_MAX,
 	EFFECT_NONE = -1
 };
@@ -40,6 +41,7 @@ const EffectAnimationParam EFFECT_ANIM_PARAM[EFFECT_MAX] =
 	6,6,128,128,   // FRASH
 	12,35,300,156, // TEACH_Z
 	12,83,300,156, // TEACH_V
+	12,54,300,156, // TEACH_ENEMY
 };
 
 void InitEffectAnimation();

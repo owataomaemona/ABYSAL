@@ -242,7 +242,8 @@ void CheckSignBoardPlayer()
 				MapChipData mapChipData = GetMapChipData(x, y);
 				// マップチップがSIGN_BOARD_BLOCKとSIGN_BOARD_BLOCK_2以外の場合は何もしない
 				if (mapChipData.mapChip != SIGN_BOARD_BLOCK &&
-					mapChipData.mapChip != SIGN_BOARD_BLOCK_2) continue;
+					mapChipData.mapChip != SIGN_BOARD_BLOCK_2 &&
+					mapChipData.mapChip != SIGN_BOARD_BLOCK_3) continue;
 
 				// 機雷のポインタが空でないか確認
 				if (mapChipData.signBoard == nullptr) continue;

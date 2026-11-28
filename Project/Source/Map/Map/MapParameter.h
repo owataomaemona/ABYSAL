@@ -21,6 +21,7 @@ enum MapChipType
 	INVISIBLE_BLOCK,    // 透明ブロック(天井や床用)
 	SIGN_BOARD_BLOCK,   // 看板ブロック(アニメーション)
 	SIGN_BOARD_BLOCK_2, // 看板2
+	SIGN_BOARD_BLOCK_3, // 看板3
 	ENEMY_1,            // エネミー(ウニ)
 	BLOCK_TYPE_MAX,
 };

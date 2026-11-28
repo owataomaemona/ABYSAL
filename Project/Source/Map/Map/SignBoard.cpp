@@ -23,6 +23,7 @@ void LoadSignBoard()
 {
 	g_SignBoardHandle[SIGN_BOARD_BLOCK] = LoadGraph("Data/Map/SignBoard.png");
 	g_SignBoardHandle[SIGN_BOARD_BLOCK_2] = LoadGraph("Data/Map/SignBoard.png");
+	g_SignBoardHandle[SIGN_BOARD_BLOCK_3] = LoadGraph("Data/Map/SignBoard.png");
 }
 
 void StepSignBoard()
@@ -110,6 +111,10 @@ void SignBoardAreaPlayer(SignBoardData* signBoard)
 		else if (signBoard->type == SIGN_BOARD_BLOCK_2)
 		{
 			effectType = EFFECT_TEACH_V;
+		}
+		else if (signBoard->type == SIGN_BOARD_BLOCK_3)
+		{
+			effectType = EFFECT_TEACH_ENEMY;
 		}
 		else
 		{
